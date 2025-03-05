@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista z checkboxem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        input, button {
+            margin: 10px;
+            padding: 5px;
+        }
+        .task {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 5px;
+        }
+        .task label {
+            flex: 1;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Lista zadań</h2>
+    <input type="text" id="taskInput" placeholder="Dodaj zadanie...">
+    <button onclick="addTask()">Dodaj</button>
+    <div id="taskList"></div>
+
+    <script>
+        // Wczytanie zapisanych zadań
+        document.addEventListener("DOMContentLoaded", loadTasks);
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskText = taskInput.value.trim();
+
+            if (taskText === "") return; // Jeśli puste, nie dodawaj
+
+            const task = { text: taskText, done: false };
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.push(task);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            taskInput.value = ""; // Wyczyść pole
+            renderTasks();
+        }
+
+        function renderTasks() {
+            const taskList = document.getElementById("taskList");
+            taskList.innerHTML = ""; // Wyczyść listę
+
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.forEach((task, index) => {
+                const div = document.createElement("div");
+                div.className = "task";
+
+                const label = document.createElement("label");
+                label.textContent = task.text;
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = task.done;
+                checkbox.onchange = () => removeTask(index);
+
+                div.appendChild(label);
+                div.appendChild(checkbox);
+                taskList.appendChild(div);
+            });
+        }
+
+        function removeTask(index) {
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.splice(index, 1); // Usuń zaznaczony wpis
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            renderTasks(); // Odśwież listę
+        }
+
+        function loadTasks() {
+            renderTasks();
+        }
+    </script>
+</body>
+</html>
