@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="dark" lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio - Stitch Design</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        primary: "#141414",
+        "background-light": "#f7f7f7",
+        "background-dark": "#191919",
+      },
+      fontFamily: { 
+        display: ["Space Grotesk"],
+        logo: ["Petit Formal Script", "cursive"]
+      },
+    },
+  },
+};
+</script>
+
+<style>
+body { min-height: 100dvh; }
+.numberOfFont { font-family: 'Petit Formal Script', cursive; }
+.reveal { transition: all 1s ease-out; opacity: 0; filter: blur(5px); transform: translateY(20px); }
+.reveal.visible { opacity: 1; filter: blur(0); transform: translateY(0); }
+</style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+
+<div class="relative flex flex-col min-h-screen w-full justify-between overflow-x-hidden">
+
+  <!-- HEADER -->
+  <header class="absolute top-0 left-0 w-full z-20 px-9 py-7">
+    <nav class="container mx-auto flex items-center justify-between text-white">
+      <a class="text-base sm:text-xl font-bold numberOfFont" href="index.html">Gracjan Śliwiński</a>
+
+      <div class="hidden md:flex items-center space-x-6">
+        <a class="hover:text-gray-300" href="omnie.html">O mnie</a>
+        <a class="hover:text-gray-300" href="#">Portfolio</a>
+        <a class="hover:text-gray-300" href="wspolpraca.html">Współpraca</a>
+        <a class="hover:text-gray-300" href="#">FAQ</a>
+        <a class="hover:text-gray-300" href="#">Oferta</a>
+      </div>
+      <button id="menu-btn" class="md:hidden">
+        <svg id="icon-hamburger" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-30 hidden">
+      <div id="menu-overlay" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity"></div>
+      <div id="menu-panel" class="absolute top-0 left-0 h-screen w-64 bg-primary text-white transform -translate-x-full transition-transform duration-300 flex flex-col p-6 space-y-6">
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="index.html"><i class="fas fa-house"></i><span>Strona Główna</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="omnie.html"><i class="fas fa-user"></i><span>O mnie</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-images"></i><span>Portfolio</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="wspolpraca.html"><i class="fas fa-handshake"></i><span>Współpraca</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-tags"></i><span>Oferta</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PORTFOLIO -->
+<main class="flex-grow container mx-auto px-4 py-28">
+  <h1 class="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">Portfolio</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- Kafelki -->
+    <div class="relative w-full h-64 rounded-lg shadow-lg overflow-hidden group reveal">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style='background-image: url("Panwww.jpg");'></div>
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+        <h2 class="text-white text-lg font-bold">Hel przewodnik turystycz.</h2>
+      </div>
+    </div>
+
+    <div class="relative w-full h-64 rounded-lg shadow-lg overflow-hidden group reveal">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjAD7N5KTNw58v4CLt7Y-7aBakhTXhgo35l1sPBMqLrekOqfd6B11jmoCRqIuuesSE9EEjHAxAFHjJ6_Xx9_126znd7rUa3Q1UyldJ9q2pYqji8v3Gm-1kgLetMdmX3WGi03HEFWd_l3kKrsVyP8h5d_C5IHS4tqBHE_xF3coH8PFWEu4qzsSmHwFZojcp27MCa4XNathHaFN0Kg-pArpr-6t1QKc8r2Xo4ZVXbL6JLmOfQWurKxMfSG_Pfum2i0pMKt3eV-v5JPQ");'></div>
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+        <h2 class="text-white text-lg font-bold">Strona WWW #2</h2>
+      </div>
+    </div>
+
+    <div class="relative w-full h-64 rounded-lg shadow-lg overflow-hidden group reveal">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRWy6Al1KbmwacWkbFcZ8FWmbWKsBNMTIFOuUB8S89c-EFAJ-6doRQoltrrSHYTyFKqI7cPLSTZtPfkLLV62knfk3ueZwQgbo8nXs_bAXHmKgTK-lmXginypoews3p_9uC-E7im1wAmRFx2CZ0KtnDCOFxazVZDRymWXM2VyL8mpwqqYoKqISndRND0dOnGS2L1I2S-JPQsydjKPN4i_0nr-oKo9jA73gxZyI3HqrYYX6u8JUYbcjomnArh0_EI6AZ0FeLna0gg94");'></div>
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+        <h2 class="text-white text-lg font-bold">Strona WWW #3</h2>
+      </div>
+    </div>
+
+    <div class="relative w-full h-64 rounded-lg shadow-lg overflow-hidden group reveal">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCHXavxgczMnUTufr0tv9BnMyJpYwSH4RWhR9Mkhde0KGSQrF5Zpe28lcMHTENd5apN49GpXwfeao9mzvNZKlXUZNGgQrlkWz5mrwIiqBLgL3VOH5XsLDkfEj08AzVtNMBr5EPacf9PaxEg-hI_lFJTEfw-sWr9yzunC2f9j14b69vEvlAlxD7VLD4mosT4dztaaGwXj2es3Su6gr_DSDEZItszhUzpNN1v0kUbg5ym8EZDN3RndU9j_JbeywfAv-CPcGTHHZImZjc");'></div>
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+        <h2 class="text-white text-lg font-bold">Strona WWW #4</h2>
+      </div>
+    </div>
+
+    <div class="relative w-full h-64 rounded-lg shadow-lg overflow-hidden group reveal">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRWy6Al1KbmwacWkbFcZ8FWmbWKsBNMTIFOuUB8S89c-EFAJ-6doRQoltrrSHYTyFKqI7cPLSTZtPfkLLV62knfk3ueZwQgbo8nXs_bAXHmKgTK-lmXginypoews3p_9uC-E7im1wAmRFx2CZ0KtnDCOFxazVZDRymWXM2VyL8mpwqqYoKqISndRND0dOnGS2L1I2S-JPQsydjKPN4i_0nr-oKo9jA73gxZyI3HqrYYX6u8JUYbcjomnArh0_EI6AZ0FeLna0gg94");'></div>
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+        <h2 class="text-white text-lg font-bold">Strona WWW #5</h2>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+  <!-- FOOTER -->
+  <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
+    <div class="mx-auto max-w-7xl px-6 py-12 text-center">
+      <div class="flex justify-center space-x-6 mb-4">
+        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="omnie.html">O mnie</a>
+        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Kontakt</a>
+        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Polityka prywatności</a>
+      </div>
+      <p class="text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+const btn = document.getElementById("menu-btn");
+const menu = document.getElementById("mobile-menu");
+const panel = document.getElementById("menu-panel");
+const overlay = document.getElementById("menu-overlay");
+const iconHamburger = document.getElementById("icon-hamburger");
+const iconClose = document.getElementById("icon-close");
+
+btn.addEventListener("click", () => {
+  if (menu.classList.contains("hidden")) {
+    menu.classList.remove("hidden");
+    setTimeout(() => { overlay.classList.remove("opacity-0"); panel.classList.remove("-translate-x-full"); }, 10);
+    iconHamburger.classList.add("hidden"); iconClose.classList.remove("hidden");
+  } else {
+    overlay.classList.add("opacity-0"); panel.classList.add("-translate-x-full");
+    iconClose.classList.add("hidden"); iconHamburger.classList.remove("hidden");
+    setTimeout(() => menu.classList.add("hidden"), 300);
+  }
+});
+
+overlay.addEventListener("click", () => {
+  overlay.classList.add("opacity-0"); panel.classList.add("-translate-x-full");
+  iconClose.classList.add("hidden"); iconHamburger.classList.remove("hidden");
+  setTimeout(() => menu.classList.add("hidden"), 300);
+});
+
+// ScrollReveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); obs.unobserve(entry.target); } });
+}, { threshold: 0.2 });
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
