@@ -132,6 +132,7 @@ body {
 
 <!-- SCRIPTS -->
 <script>
+  // MOBILE MENU
   const btn = document.getElementById("menu-btn");
   const menu = document.getElementById("mobile-menu");
   const panel = document.getElementById("menu-panel");
@@ -151,14 +152,23 @@ body {
     setTimeout(() => menu.classList.add("hidden"), 300);
   });
 
-  // Parallax JS - działa na desktop i mobile
+  // PŁYNNY PARALLAX
   const parallaxElements = document.querySelectorAll('.parallax');
+  let scrollPos = 0;
+  let ticking = false;
+
   window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset;
-    parallaxElements.forEach(el => {
-      const speed = 0.5; // regulacja szybkości efektu
-      el.style.backgroundPosition = `center ${scrollTop * speed}px`;
-    });
+    scrollPos = window.pageYOffset;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        parallaxElements.forEach(el => {
+          const speed = 0.3; // wolniejszy = bardziej płynny
+          el.style.backgroundPosition = `center ${scrollPos * speed}px`;
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 </script>
 </body>
