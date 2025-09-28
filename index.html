@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
+<html class="dark" lang="en">
+<head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
 <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet"/>
 <title>Stitch Design</title>
@@ -10,219 +11,126 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&display=swap" rel="stylesheet">
 <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#141414",
-                        "background-light": "#f7f7f7",
-                        "background-dark": "#191919",
-                    },
-                    fontFamily: {
-                        "display": ["Space Grotesk"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                },
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#141414",
+                "background-light": "#f7f7f7",
+                "background-dark": "#191919",
             },
-        }
-    </script>
+            fontFamily: {
+                "display": ["Space Grotesk"]
+            },
+            borderRadius: {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+        },
+    },
+}
+</script>
 <style>
-    .numberOfFont {
-        font-family: 'Petit Formal Script', cursiv
-    }
-        body {
-            min-height: max(884px, 100dvh);
-        }
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-    </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
+body {
+    min-height: max(884px, 100dvh);
+}
+.numberOfFont {
+    font-family: 'Petit Formal Script', cursive;
+}
+/* Parallax działa na mobile i desktop */
+.parallax {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+</head>
 <body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+
 <div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden">
-<div>
-<header class="absolute top-0 left-0 w-full z-20 px-9 py-7">
-  <nav class="container mx-auto flex items-center justify-between text-white">
-    <a class="text-xl font-bold numberOfFont" href="#">Gracjan Śliwiński</a>
+  <!-- HEADER -->
+  <header class="absolute top-0 left-0 w-full z-20 px-9 py-7">
+    <nav class="container mx-auto flex items-center justify-between text-white">
+      <a class="text-xl font-bold numberOfFont" href="#">Gracjan Śliwiński</a>
 
-    <!-- Desktop menu -->
-    <div class="hidden md:flex items-center space-x-6">
-      <a class="hover:text-gray-300" href="#">O mnie</a>
-      <a class="hover:text-gray-300" href="#">Portfolio</a>
-      <a class="hover:text-gray-300" href="wspolpraca.html">Współpraca</a>
-      <a class="hover:text-gray-300" href="#">FAQ</a>
-      <a class="hover:text-gray-300" href="#">Oferta</a>
+      <!-- Desktop menu -->
+      <div class="hidden md:flex items-center space-x-6">
+        <a class="hover:text-gray-300" href="#">O mnie</a>
+        <a class="hover:text-gray-300" href="#">Portfolio</a>
+        <a class="hover:text-gray-300" href="wspolpraca.html">Współpraca</a>
+        <a class="hover:text-gray-300" href="#">FAQ</a>
+        <a class="hover:text-gray-300" href="#">Oferta</a>
+      </div>
+
+      <!-- Mobile button -->
+      <button id="menu-btn" class="md:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile off-canvas menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-30 hidden">
+      <div id="menu-overlay" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity"></div>
+      <div id="menu-panel"
+        class="absolute top-0 left-0 h-full w-64 bg-primary text-white transform -translate-x-full transition-transform duration-300 flex flex-col p-6 space-y-6">
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="index.html"><i class="fas fa-house"></i><span>Strona Główna</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-user"></i><span>O mnie</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-images"></i><span>Portfolio</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-handshake"></i><span>Współpraca</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-tags"></i><span>Oferta</span></a>
+      </div>
     </div>
+  </header>
 
-    <!-- Mobile button -->
-    <button id="menu-btn" class="md:hidden">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round"
-          stroke-linejoin="round" stroke-width="2"></path>
-      </svg>
-    </button>
-  </nav>
+  <!-- HERO PARALLAX -->
+  <div class="p-4 @container">
+    <div class="relative flex min-h-[80vh] flex-col gap-6 overflow-hidden bg-cover bg-center bg-no-repeat rounded-xl p-6 @[480px]:gap-8 items-start justify-end parallax" style='background-image: url("https://images.unsplash.com/photo-1604311795833-25e1d5c128c6?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8OSUzQTE2fGVufDB8fDB8fHww");'>
+      <div class="absolute inset-0 bg-black/50 rounded-xl"></div>
+      <div class="relative flex flex-col gap-4 text-left z-10">
+        <h1 class="text-white text-4xl font-bold leading-tight tracking-tight @[480px]:text-6xl">Tworzę strony internetowe</h1>
+        <p class="text-gray-200 text-base font-normal leading-normal @[480px]:text-lg max-w-2xl">
+          Specjalizuję się w tworzeniu nowoczesnych, profesjonalnych stron internetowych o minimalistycznej estetyce, wykorzystując wysokiej jakości wizualizacje i efekty paralaksy w celu poprawy doświadczeń użytkownika.
+        </p>
+      </div>
+      <a class="relative z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-wide transition-colors hover:bg-opacity-90" href="#">
+        <span class="truncate">Czytaj dalej</span>
+      </a>
+    </div>
+  </div>
 
-  <!-- Mobile off-canvas menu -->
-<div id="mobile-menu"
-  class="fixed inset-0 z-30 hidden">
-  
-  <!-- Overlay -->
-  <div id="menu-overlay" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity"></div>
-  
-  <!-- Panel (wysuwane z lewej) -->
-  <div id="menu-panel"
-    class="absolute top-0 left-0 h-full w-64 bg-primary text-white transform -translate-x-full transition-transform duration-300 flex flex-col p-6 space-y-6">
-    
-    <a class="flex items-center space-x-3 hover:text-gray-300" href="index.html">
-      <i class="fas fa-house"></i>
-      <span>Strona Główna</span>
-    </a>
-    
-    <a class="flex items-center space-x-3 hover:text-gray-300" href="#">
-      <i class="fas fa-user"></i>
-      <span>O mnie</span>
-    </a>
-    
-    <a class="flex items-center space-x-3 hover:text-gray-300" href="#">
-      <i class="fas fa-images"></i>
-      <span>Portfolio</span>
-    </a>
-    
-    <a class="flex items-center space-x-3 hover:text-gray-300" href="#">
-      <i class="fas fa-handshake"></i>
-      <span>Współpraca</span>
-    </a>
-    
-    <a class="flex items-center space-x-3 hover:text-gray-300" href="#">
-      <i class="fas fa-question-circle"></i>
-      <span>FAQ</span>
-    </a>
-    
-    <a class="flex items-center space-x-3 hover:text-gray-300" href="#">
-      <i class="fas fa-tags"></i>
-      <span>Oferta</span>
-    </a>
-    
+  <!-- CONTENT -->
+  <div class="flex flex-col gap-12 px-4 py-16 @container sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-4 text-center items-center">
+      <h2 class="text-gray-900 dark:text-white text-3xl font-bold leading-tight tracking-tight @[480px]:text-5xl max-w-3xl">Moje Podejście</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-lg font-normal leading-normal max-w-3xl">
+        Koncentruję się na tworzeniu wizualnie oszałamiających stron internetowych, które są zarówno funkcjonalne, jak i przyjazne dla użytkownika. Moje projekty wykorzystują przewijanie paralaksy, aby dodać głębi i zaangażowania.
+      </p>
+    </div>
   </div>
 </div>
 
-
-</header>
-<div class="p-4 @container">
-<div class="relative flex min-h-[80vh] flex-col gap-6 overflow-hidden bg-cover bg-center bg-no-repeat rounded-xl p-6 @[480px]:gap-8 items-start justify-end @[480px]:p-10 parallax" style='background-image: url("https://images.unsplash.com/photo-1604311795833-25e1d5c128c6?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8OSUzQTE2fGVufDB8fDB8fHww");'>
-<div class="absolute inset-0 bg-black/50 rounded-xl"></div>
-<div class="relative flex flex-col gap-4 text-left z-10">
-<h1 class="text-white text-4xl font-bold leading-tight tracking-tight @[480px]:text-6xl">
-                            Tworzę strony internetowe
-                        </h1>
-<p class="text-gray-200 text-base font-normal leading-normal @[480px]:text-lg max-w-2xl">
-                            Specjalizuję się w tworzeniu nowoczesnych, profesjonalnych stron internetowych o
-                            minimalistycznej estetyce, wykorzystując wysokiej jakości wizualizacje i efekty
-                            paralaksy w celu poprawy doświadczeń użytkownika.
-                        </p>
-</div>
-<a class="relative z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-wide transition-colors hover:bg-opacity-90" href="#">
-<span class="truncate">Czytaj dalej</span>
-</a>
-</div>
-</div>
-<div class="flex flex-col gap-12 px-4 py-16 @container sm:px-6 lg:px-8">
-<div class="flex flex-col gap-4 text-center items-center">
-<h2 class="text-gray-900 dark:text-white text-3xl font-bold leading-tight tracking-tight @[480px]:text-5xl max-w-3xl">
-                        Moje Podejście
-                    </h2>
-<p class="text-gray-600 dark:text-gray-400 text-lg font-normal leading-normal max-w-3xl">
-                        Koncentruję się na tworzeniu wizualnie oszałamiających stron internetowych, które są zarówno
-                        funkcjonalne, jak i przyjazne dla użytkownika. Moje projekty wykorzystują przewijanie
-                        paralaksy, aby dodać głębi i zaangażowania, zapewniając niezapomniane wrażenia z
-                        przeglądania.
-                    </p>
-</div>
-<div class="grid grid-cols-1 gap-8 md:grid-cols-3 @[480px]:gap-6">
-<div class="flex flex-col gap-4">
-<div class="w-full aspect-video bg-cover bg-center rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBVGEIIhwLECdBkg2XmXWyT6lUMJqA28Gi5GLGLP7mXha76Ynt1dqZQgxUbR9NdKbRj1-P-DzsprCUYHhRuGhsLu2_i3oUSFxUrbA5HzX20H8cW_LHTBPRIzHvPD46M_X_BJktaOCg2zhSI08atLLiItJYEeNjwO176PQQA6T6W4EDag8MPPDfXw3HQnxjctHNNFs397QbnIi5JngLOjE2Ep1ytSuS0cBfQLyNXpabUExGHugFtB7v6nziRpxgX0bRWOzsawQXBks4");'>
-</div>
-<div>
-<h3 class="text-gray-900 dark:text-white text-xl font-bold">Wizualna Doskonałość</h3>
-<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
-                                Priorytetem dla mnie są wysokiej jakości wizualizacje i minimalistyczna estetyka, aby
-                                tworzyć strony internetowe, które są zarówno piękne, jak i skuteczne.
-                            </p>
-</div>
-</div>
-<div class="flex flex-col gap-4">
-<div class="w-full aspect-video bg-cover bg-center rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHWtEWIC2cQLKpwHDKbi942qzwrwNOy3skd_J3HghtIJHSdHgzBlZmkhNdBj0-O2NztI9L_gek-O83wCT0GTiqCumx7Wp_vNDfm7o1aW7Qd8p3oafhA0dYsrbiayvicpyOKjc4BQWBw_xq8VfR8wD7YEHQVLG_eR8yKlW8nCSpsFMa3ELyfZ7lAIs1UCUKlggGAJ79sd77kPaCV3zsyGmXKObw4Mp2sbFoo3vxDT3y0rvo-JPXahHKobL2LErlRfOqDUgsJbU1qSg");'>
-</div>
-<div>
-<h3 class="text-gray-900 dark:text-white text-xl font-bold">Funkcjonalny Design</h3>
-<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">Moje
-                                projekty są nie tylko atrakcyjne wizualnie, ale także zoptymalizowane pod kątem
-                                wydajności i użyteczności.</p>
-</div>
-</div>
-<div class="flex flex-col gap-4">
-<div class="w-full aspect-video bg-cover bg-center rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFEH2tNM9uRy_z4Q2K4DsVBTPJ7VpX-m4xGpkMQq4e3viLZ_qxg6i5ODgdcXby5XHnrWCS3Kskn6qiwQq44om9kGtgu31VrRTaUEGFD1jfs9Pedsjw0Nrp0PZ_DEYWCYkerL2lW30GGH5cbEfbjRv8_MhFlxRXCqJa-6fRUhpkrBo9ZQr5d4YZBa_AvDt1bgZ6LYkNix4IFIJbxCzbT-k7MY9Cj89NPYs-c1qfH5LxF4EUzLDE_Ngr56xA372dOlRLAn1QjYnYbXg");'>
-</div>
-<div>
-<h3 class="text-gray-900 dark:text-white text-xl font-bold">Angażujące Doświadczenie</h3>
-<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
-                                Używam przewijania paralaksy i innych interaktywnych elementów, aby stworzyć
-                                dynamiczne i angażujące doświadczenie użytkownika.
-                            </p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<!-- FOOTER -->
 <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
-<div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-<div class="flex items-center justify-center space-x-6">
-<a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">O mnie</a>
-<a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Kontakt</a>
-<a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Polityka prywatności</a>
-</div>
-<div class="mt-8 flex justify-center space-x-6">
-<a class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" href="#">
-<span class="sr-only">Twitter</span>
-<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
-</path>
-</svg>
-</a>
-<a class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" href="#">
-<span class="sr-only">Instagram</span>
-<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-<path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 012.153 2.153c.247.636.398 1.363.444 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.046 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-2.153 2.153c-.636.247-1.363.398-2.427.444-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-2.153-2.153c-.247-.636-.398-1.363-.444-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.046-1.064.218-1.791.465-2.427A4.902 4.902 0 015.09 4.623c.636-.247 1.363-.398 2.427-.444C8.532 2.013 8.886 2 12.315 2zM12 7.042c-2.733 0-4.958 2.225-4.958 4.958s2.225 4.958 4.958 4.958 4.958-2.225 4.958-4.958S14.733 7.042 12 7.042zm0 8.217c-1.803 0-3.26-1.457-3.26-3.26s1.457-3.26 3.26-3.26 3.26 1.457 3.26 3.26-1.457 3.26-3.26 3.26zM17.17 6.482a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" fill-rule="evenodd"></path>
-</svg>
-</a>
-<a class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" href="#">
-<span class="sr-only">Facebook</span>
-<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-<path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
-</svg>
-</a>
-</div>
-<p class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Gracjan Śliwiński.
-                    Wszelkie prawa zastrzeżone.</p>
-</div>
+  <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div class="flex items-center justify-center space-x-6">
+      <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">O mnie</a>
+      <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Kontakt</a>
+      <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Polityka prywatności</a>
+    </div>
+    <p class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
+  </div>
 </footer>
 </div>
+
+<!-- SCRIPTS -->
 <script>
   const btn = document.getElementById("menu-btn");
   const menu = document.getElementById("mobile-menu");
@@ -242,6 +150,16 @@
     panel.classList.add("-translate-x-full");
     setTimeout(() => menu.classList.add("hidden"), 300);
   });
-</script>
-</body></html>
 
+  // Parallax JS - działa na desktop i mobile
+  const parallaxElements = document.querySelectorAll('.parallax');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset;
+    parallaxElements.forEach(el => {
+      const speed = 0.5; // regulacja szybkości efektu
+      el.style.backgroundPosition = `center ${scrollTop * speed}px`;
+    });
+  });
+</script>
+</body>
+</html>
