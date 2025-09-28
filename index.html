@@ -37,18 +37,13 @@ tailwind.config = {
 body {
     min-height: max(884px, 100dvh);
 }
-html {
-    scroll-behavior: smooth;
-}
 .numberOfFont {
     font-family: 'Petit Formal Script', cursive;
 }
 .reveal {
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(20px);
   transition: all 1s ease-out;
 }
+
 .reveal.visible {
   opacity: 1;
   filter: blur(0);
@@ -61,13 +56,14 @@ html {
 }
 </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200 scroll-smooth">
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
 
 <div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden">
   <!-- HEADER -->
   <header class="absolute top-0 left-0 w-full z-20 px-9 py-7">
     <nav class="container mx-auto flex items-center justify-between text-white">
       <a class="text-base sm:text-xl font-bold numberOfFont" href="index.html">Gracjan Śliwiński</a>
+
       <div class="hidden md:flex items-center space-x-6">
         <a class="hover:text-gray-300" href="#">O mnie</a>
         <a class="hover:text-gray-300" href="#">Portfolio</a>
@@ -76,104 +72,126 @@ html {
         <a class="hover:text-gray-300" href="#">Oferta</a>
       </div>
 
-      <button id="menu-btn" class="md:hidden">
-        <svg id="icon-hamburger" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-        </svg>
-        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-        </svg>
-      </button>
+<button id="menu-btn" class="md:hidden">
+  <!-- Hamburger -->
+  <svg id="icon-hamburger" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 6h16M4 12h16m-7 6h7"
+      stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+  </svg>
+  <!-- X -->
+  <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 18L18 6M6 6l12 12"
+      stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+  </svg>
+</button>
+
     </nav>
 
     <div id="mobile-menu" class="fixed inset-0 z-30 hidden">
       <div id="menu-overlay" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity"></div>
-      <div id="menu-panel" class="absolute top-0 left-0 h-screen w-64 bg-primary text-white transform -translate-x-full transition-transform duration-300 flex flex-col p-6 space-y-6">
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="index.html"><i class="fas fa-house"></i><span>Strona Główna</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-user"></i><span>O mnie</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-images"></i><span>Portfolio</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-handshake"></i><span>Współpraca</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-tags"></i><span>Oferta</span></a>
-      </div>
+      <div id="menu-panel"
+  class="absolute top-0 left-0 h-screen w-64 bg-primary text-white transform -translate-x-full transition-transform duration-300 flex flex-col p-6 space-y-6">
+  <a class="flex items-center space-x-3 hover:text-gray-300" href="index.html"><i class="fas fa-house"></i><span>Strona Główna</span></a>
+  <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-user"></i><span>O mnie</span></a>
+  <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-images"></i><span>Portfolio</span></a>
+  <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-handshake"></i><span>Współpraca</span></a>
+  <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+  <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-tags"></i><span>Oferta</span></a>
+</div>
+
     </div>
   </header>
 
-<!-- HERO PARALLAX -->
-<div class="p-4 @container">
-  <div class="relative flex min-h-screen flex-col gap-6 overflow-hidden bg-cover bg-center rounded-xl p-6 @[480px]:gap-8 items-start justify-end parallax max-w-3xl mx-auto"
-       style='background-image: url("backgroundfix.jpg");'>
-    <div class="absolute inset-0 bg-black/50 rounded-xl"></div>
-    <div class="relative flex flex-col gap-4 text-left z-10">
-      <h1 class="text-white text-4xl font-bold leading-tight tracking-tight @[480px]:text-6xl">Tworzę strony internetowe</h1>
-      <p class="text-gray-200 text-base font-normal leading-normal @[480px]:text-lg max-w-2xl">
-        Specjalizuję się w tworzeniu nowoczesnych, profesjonalnych stron internetowych o minimalistycznej estetyce, wykorzystując wysokiej jakości wizualizacje i efekty paralaksy w celu poprawy doświadczeń użytkownika.
-      </p>
-      <a class="relative z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-wide transition-colors hover:bg-opacity-90"
-         href="#about">
+  <!-- HERO PARALLAX -->
+  <div class="p-4 @container">
+    <div class="relative flex min-h-[80vh] flex-col gap-6 overflow-hidden bg-cover bg-center bg-no-repeat rounded-xl p-6 @[480px]:gap-8 items-start justify-end parallax" style='background-image: url("backgroundfix.jpg");'>
+      <div class="absolute inset-0 bg-black/50 rounded-xl"></div>
+      <div class="relative flex flex-col gap-4 text-left z-10">
+        <h1 class="text-white text-4xl font-bold leading-tight tracking-tight @[480px]:text-6xl">Tworzę strony internetowe</h1>
+        <p class="text-gray-200 text-base font-normal leading-normal @[480px]:text-lg max-w-2xl">
+          Specjalizuję się w tworzeniu nowoczesnych, profesjonalnych stron internetowych o minimalistycznej estetyce, wykorzystując wysokiej jakości wizualizacje i efekty paralaksy w celu poprawy doświadczeń użytkownika.
+        </p>
+      </div>
+      <a class="relative z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-wide transition-colors hover:bg-opacity-90" href="#">
         <span class="truncate">Czytaj dalej</span>
       </a>
     </div>
   </div>
-</div>
-
 
   <!-- CONTENT -->
-  <div id="about" class="flex flex-col gap-12 px-4 py-16 max-w-7xl mx-auto reveal">
+   <div class="flex flex-col gap-4 reveal opacity-0 blur-sm translate-y-6">
+  <div class="flex flex-col gap-12 px-4 py-16 @container sm:px-6 lg:px-8">
     <div class="flex flex-col gap-4 text-center items-center">
-      <h2 class="text-gray-900 dark:text-white text-3xl font-bold sm:text-5xl">Moje Podejście</h2>
-      <p class="text-gray-600 dark:text-gray-400 text-lg max-w-3xl">
+      <h2 class="text-gray-900 dark:text-white text-3xl font-bold leading-tight tracking-tight @[480px]:text-5xl max-w-3xl">Moje Podejście</h2>
+      <p class="text-gray-600 dark:text-gray-400 text-lg font-normal leading-normal max-w-3xl">
         Koncentruję się na tworzeniu wizualnie oszałamiających stron internetowych, które są zarówno funkcjonalne, jak i przyjazne dla użytkownika. Moje projekty wykorzystują przewijanie paralaksy, aby dodać głębi i zaangażowania.
       </p>
     </div>
   </div>
-
-  <!-- BLOK 3 KAFELKI -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-3">
-    <!-- Kafelek 1 -->
-    <div class="flex flex-col gap-4 reveal">
-      <div class="w-full aspect-video bg-cover bg-center rounded-lg"
-        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBVGEIIhwLECdBkg2XmXWyT6lUMJqA28Gi5GLGLP7mXha76Ynt1dqZQgxUbR9NdKbRj1-P-DzsprCUYHhRuGhsLu2_i3oUSFxUrbA5HzX20H8cW_LHTBPRIzHvPD46M_X_BJktaOCg2zhSI08atLLiItJYEeNjwO176PQQA6T6W4EDag8MPPDfXw3HQnxjctHNNFs397QbnIi5JngLOjE2Ep1ytSuS0cBfQLyNXpabUExGHugFtB7v6nziRpxgX0bRWOzsawQXBks4");'></div>
-      <h3 class="text-gray-900 dark:text-white text-xl font-bold">Wizualna Doskonałość</h3>
-      <p class="text-gray-600 dark:text-gray-400 text-base leading-relaxed">
-        Priorytetem dla mnie są wysokiej jakości wizualizacje i minimalistyczna estetyka, aby tworzyć strony internetowe, które są zarówno piękne, jak i skuteczne.
-      </p>
-    </div>
-    <!-- Kafelek 2 -->
-    <div class="flex flex-col gap-4 reveal">
-      <div class="w-full aspect-video bg-cover bg-center rounded-lg"
-        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHWtEWIC2cQLKpwHDKbi942qzwrwNOy3skd_J3HghtIJHSdHgzBlZmkhNdBj0-O2NztI9L_gek-O83wCT0GTiqCumx7Wp_vNDfm7o1aW7Qd8p3oafhA0dYsrbiayvicpyOKjc4BQWBw_xq8VfR8wD7YEHQVLG_eR8yKlW8nCSpsFMa3ELyfZ7lAIs1UCUKlggGAJ79sd77kPaCV3zsyGmXKObw4Mp2sbFoo3vxDT3y0rvo-JPXahHKobL2LErlRfOqDUgsJbU1qSg");'></div>
-      <h3 class="text-gray-900 dark:text-white text-xl font-bold">Funkcjonalny Design</h3>
-      <p class="text-gray-600 dark:text-gray-400 text-base leading-relaxed">
-        Moje projekty są nie tylko atrakcyjne wizualnie, ale także zoptymalizowane pod kątem wydajności i użyteczności.
-      </p>
-    </div>
-    <!-- Kafelek 3 -->
-    <div class="flex flex-col gap-4 reveal">
-      <div class="w-full aspect-video bg-cover bg-center rounded-lg"
-        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFEH2tNM9uRy_z4Q2K4DsVBTPJ7VpX-m4xGpkMQq4e3viLZ_qxg6i5ODgdcXby5XHnrWCS3Kskn6qiwQq44om9kGtgu31VrRTaUEGFD1jfs9Pedsjw0Nrp0PZ_DEYWCYkerL2lW30GGH5cbEfbjRv8_MhFlxRXCqJa-6fRUhpkrBo9ZQr5d4YZBa_AvDt1bgZ6LYkNix4IFIJbxCzbT-k7MY9Cj89NPYs-c1qfH5LxF4EUzLDE_Ngr56xA372dOlRLAn1QjYnYbXg");'></div>
-      <h3 class="text-gray-900 dark:text-white text-xl font-bold">Angażujące Doświadczenie</h3>
-      <p class="text-gray-600 dark:text-gray-400 text-base leading-relaxed">
-        Używam przewijania paralaksy i innych interaktywnych elementów, aby stworzyć dynamiczne i angażujące doświadczenie użytkownika.
-      </p>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 mt-16">
-    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-      <div class="flex items-center justify-center space-x-6">
-        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">O mnie</a>
-        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Kontakt</a>
-        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Polityka prywatności</a>
-      </div>
-      <p class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
-    </div>
-  </footer>
+</div>
 </div>
 
+<!-- BLOK 3 KAFELKI -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 gap-8 md:grid-cols-3 @[480px]:gap-6">
+    <!-- Kafelek 1 -->
+    <div class="flex flex-col gap-4 reveal opacity-0 blur-sm translate-y-6">
+      <div class="w-full aspect-video bg-cover bg-center rounded-lg"
+        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBVGEIIhwLECdBkg2XmXWyT6lUMJqA28Gi5GLGLP7mXha76Ynt1dqZQgxUbR9NdKbRj1-P-DzsprCUYHhRuGhsLu2_i3oUSFxUrbA5HzX20H8cW_LHTBPRIzHvPD46M_X_BJktaOCg2zhSI08atLLiItJYEeNjwO176PQQA6T6W4EDag8MPPDfXw3HQnxjctHNNFs397QbnIi5JngLOjE2Ep1ytSuS0cBfQLyNXpabUExGHugFtB7v6nziRpxgX0bRWOzsawQXBks4");'>
+      </div>
+      <div>
+        <h3 class="text-gray-900 dark:text-white text-xl font-bold">Wizualna Doskonałość</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
+          Priorytetem dla mnie są wysokiej jakości wizualizacje i minimalistyczna estetyka, aby tworzyć strony internetowe, które są zarówno piękne, jak i skuteczne.
+        </p>
+      </div>
+    </div>
+
+    <!-- Kafelek 2 -->
+    <div class="flex flex-col gap-4 reveal opacity-0 blur-sm translate-y-6">
+      <div class="w-full aspect-video bg-cover bg-center rounded-lg"
+        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHWtEWIC2cQLKpwHDKbi942qzwrwNOy3skd_J3HghtIJHSdHgzBlZmkhNdBj0-O2NztI9L_gek-O83wCT0GTiqCumx7Wp_vNDfm7o1aW7Qd8p3oafhA0dYsrbiayvicpyOKjc4BQWBw_xq8VfR8wD7YEHQVLG_eR8yKlW8nCSpsFMa3ELyfZ7lAIs1UCUKlggGAJ79sd77kPaCV3zsyGmXKObw4Mp2sbFoo3vxDT3y0rvo-JPXahHKobL2LErlRfOqDUgsJbU1qSg");'>
+      </div>
+      <div>
+        <h3 class="text-gray-900 dark:text-white text-xl font-bold">Funkcjonalny Design</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
+          Moje projekty są nie tylko atrakcyjne wizualnie, ale także zoptymalizowane pod kątem wydajności i użyteczności.
+        </p>
+      </div>
+    </div>
+
+    <!-- Kafelek 3 -->
+    <div class="flex flex-col gap-4 reveal opacity-0 blur-sm translate-y-6">
+      <div class="w-full aspect-video bg-cover bg-center rounded-lg"
+        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFEH2tNM9uRy_z4Q2K4DsVBTPJ7VpX-m4xGpkMQq4e3viLZ_qxg6i5ODgdcXby5XHnrWCS3Kskn6qiwQq44om9kGtgu31VrRTaUEGFD1jfs9Pedsjw0Nrp0PZ_DEYWCYkerL2lW30GGH5cbEfbjRv8_MhFlxRXCqJa-6fRUhpkrBo9ZQr5d4YZBa_AvDt1bgZ6LYkNix4IFIJbxCzbT-k7MY9Cj89NPYs-c1qfH5LxF4EUzLDE_Ngr56xA372dOlRLAn1QjYnYbXg");'>
+      </div>
+      <div>
+        <h3 class="text-gray-900 dark:text-white text-xl font-bold">Angażujące Doświadczenie</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
+          Używam przewijania paralaksy i innych interaktywnych elementów, aby stworzyć dynamiczne i angażujące doświadczenie użytkownika.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- KONIEC BLOKU KAFELKI -->
+
+
+<!-- FOOTER -->
+<footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
+  <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div class="flex items-center justify-center space-x-6">
+      <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">O mnie</a>
+      <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Kontakt</a>
+      <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Polityka prywatności</a>
+    </div>
+    <p class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
+  </div>
+</footer>
+
 <script>
-  // MOBILE MENU TOGGLE
   const btn = document.getElementById("menu-btn");
   const menu = document.getElementById("mobile-menu");
   const panel = document.getElementById("menu-panel");
@@ -183,11 +201,16 @@ html {
 
   btn.addEventListener("click", () => {
     if (menu.classList.contains("hidden")) {
+      // Otwórz menu
       menu.classList.remove("hidden");
-      setTimeout(() => { overlay.classList.remove("opacity-0"); panel.classList.remove("-translate-x-full"); }, 10);
+      setTimeout(() => {
+        overlay.classList.remove("opacity-0");
+        panel.classList.remove("-translate-x-full");
+      }, 10);
       iconHamburger.classList.add("hidden");
       iconClose.classList.remove("hidden");
     } else {
+      // Zamknij menu
       overlay.classList.add("opacity-0");
       panel.classList.add("-translate-x-full");
       iconClose.classList.add("hidden");
@@ -203,38 +226,48 @@ html {
     iconHamburger.classList.remove("hidden");
     setTimeout(() => menu.classList.add("hidden"), 300);
   });
+</script>
 
-  // PARALLAX
+<script>
+  // HYBRID PARALLAX - Desktop CSS / Mobile JS z easingiem
   const parallaxElements = document.querySelectorAll('.parallax');
   const isMobile = /Mobi|Android/i.test(navigator.userAgent) || /iPad|iPhone|iPod/.test(navigator.userAgent);
-
+  
   if(isMobile){
     let scrollPos = 0;
     let currentY = 0;
     const speed = 0.3;
+    
+    window.addEventListener('scroll', () => {
+      scrollPos = window.pageYOffset;
+    });
 
-    window.addEventListener('scroll', () => { scrollPos = window.pageYOffset; });
     function animateParallax(){
-      currentY += (scrollPos - currentY) * 0.1;
-      parallaxElements.forEach(el => { el.style.backgroundPosition = `center ${currentY * speed}px`; });
+      currentY += (scrollPos - currentY) * 0.1; // easing
+      parallaxElements.forEach(el => {
+        el.style.backgroundPosition = `center ${currentY * speed}px`;
+      });
       requestAnimationFrame(animateParallax);
     }
     animateParallax();
   } else {
     parallaxElements.forEach(el => el.style.backgroundAttachment = 'fixed');
   }
-
-  // REVEAL ON SCROLL
+</script>
+<script>
   const reveals = document.querySelectorAll('.reveal');
+
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting){
+      if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        obs.unobserve(entry.target);
+        obs.unobserve(entry.target); // animacja tylko raz
       }
     });
   }, { threshold: 0.2 });
+
   reveals.forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
