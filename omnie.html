@@ -16,7 +16,7 @@
         extend: {
           colors: {
             primary: "#000000",
-            "background-light": "#000000",
+            "background-light": "#f7f7f7",
             "background-dark": "#000000",
           },
           fontFamily: { display: ["Space Grotesk"] },
@@ -28,8 +28,8 @@
   <style>
     body { min-height: 100dvh; }
     .numberOfFont { font-family: 'Petit Formal Script', cursive; }
-    .reveal { transition: all 1s ease-out; opacity: 0; transform: translateY(20px); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal { transition: all 1s ease-out; opacity: 0; filter: blur(5px); transform: translateY(20px); }
+    .reveal.visible { opacity: 1; filter: blur(0); transform: translateY(0); }
     .progress-bar { width: 0; transition: width 2s ease-out; }
   </style>
 </head>
@@ -78,8 +78,8 @@
   <main class="pt-28 flex-grow">
 
     <!-- Sekcja z obrazkiem -->
-    <section class="py-12 md:py-24 lg:py-32">
-      <div class="container mx-auto px-4 md:px-6 flex flex-col items-center text-center reveal">
+    <section class="py-12 md:py-24 lg:py-32 reveal">
+      <div class="container mx-auto px-4 md:px-6 flex flex-col items-center text-center">
         <div class="mb-8 w-full max-w-sm md:max-w-md lg:max-w-lg">
           <img alt="O Mnie" class="w-full h-auto rounded-lg object-cover" src="https://fotolabedz.com.pl/images/image/Zdjecia-biznesowe/biznesowe2.jpg"/>
         </div>
@@ -92,40 +92,43 @@
 
     <!-- Liczniki -->
     <section class="relative bg-primary py-16">
-      <div class="container mx-auto px-4 md:px-6 flex flex-col sm:flex-row justify-center items-center gap-12 reveal">
+      <div class="container mx-auto px-4 md:px-6 flex flex-col sm:flex-row justify-center items-center gap-12">
+
         <!-- Licznik 1 -->
-        <div class="flex flex-col items-center justify-center space-y-2 p-4">
+        <div class="flex flex-col items-center justify-center space-y-2 p-4 reveal">
           <h3 class="text-lg font-semibold uppercase tracking-widest text-white/70">Zadowolenie klientów</h3>
           <div class="relative h-2 w-40 overflow-hidden rounded-full bg-gray-700">
             <div class="progress-bar absolute h-full bg-white" data-target="100"></div>
           </div>
           <span class="text-5xl font-bold counter" data-target="100">0%</span>
         </div>
+
         <!-- Licznik 2 -->
-      <div class="container mx-auto px-4 md:px-6 flex flex-col sm:flex-row justify-center items-center gap-12 reveal">
-        <!-- Licznik 1 -->
-        <div class="flex flex-col items-center justify-center space-y-2 p-4">
-          <h3 class="text-lg font-semibold uppercase tracking-widest text-white/70"></h3>
+        <div class="flex flex-col items-center justify-center space-y-2 p-4 reveal">
+          <h3 class="text-lg font-semibold uppercase tracking-widest text-white/70">Dopasowanie do potrzeb</h3>
           <div class="relative h-2 w-40 overflow-hidden rounded-full bg-gray-700">
-            <div class="progress-bar absolute h-full bg-white" data-target="98">Dopasowanie do potrzeb</div>
+            <div class="progress-bar absolute h-full bg-white" data-target="98"></div>
           </div>
           <span class="text-5xl font-bold counter" data-target="98">0%</span>
         </div>
+
+      </div>
     </section>
 
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-primary text-white">
+  <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
     <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8 text-center">
       <div class="flex justify-center space-x-6 mb-4">
-        <a class="text-gray-400 hover:text-white" href="#">O mnie</a>
-        <a class="text-gray-400 hover:text-white" href="#">Kontakt</a>
-        <a class="text-gray-400 hover:text-white" href="#">Polityka prywatności</a>
+        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">O mnie</a>
+        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Kontakt</a>
+        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Polityka prywatności</a>
       </div>
-      <p class="text-sm text-gray-500">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
+      <p class="text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
     </div>
   </footer>
+
 </div>
 
 <script>
