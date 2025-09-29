@@ -5,49 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>O Mnie - Stitch Design</title>
   <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
   <script>
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          primary: "#141414",
-          "background-light": "#f7f7f7",
-          "background-dark": "#191919",
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#000000",
+            "background-light": "#000000",
+            "background-dark": "#000000",
+          },
+          fontFamily: { display: ["Space Grotesk"] },
         },
-        fontFamily: { display: ["Space Grotesk"] },
       },
-    },
-  };
+    };
   </script>
 
   <style>
     body { min-height: 100dvh; }
     .numberOfFont { font-family: 'Petit Formal Script', cursive; }
-    .reveal { transition: all 1s ease-out; opacity: 0; filter: blur(5px); transform: translateY(40px); }
-    .reveal.visible { opacity: 1; filter: blur(0); transform: translateY(0); }
+    .reveal { transition: all 1s ease-out; opacity: 0; transform: translateY(20px); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
     .progress-bar { width: 0; transition: width 2s ease-out; }
   </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<body class="bg-background-light dark:bg-background-dark font-display text-white">
 
 <div class="relative flex flex-col min-h-screen w-full justify-between overflow-x-hidden">
 
   <!-- HEADER -->
-  <header class="absolute top-0 left-0 w-full z-20 px-9 py-7">
+  <header class="absolute top-0 left-0 w-full z-20 px-9 py-7 bg-primary">
     <nav class="container mx-auto flex items-center justify-between text-white">
       <a class="text-base sm:text-xl font-bold numberOfFont" href="index.html">Gracjan Śliwiński</a>
       <div class="hidden md:flex items-center space-x-6">
-        <a class="hover:text-gray-300" href="#">O mnie</a>
-        <a class="hover:text-gray-300" href="#">Portfolio</a>
-        <a class="hover:text-gray-300" href="wspolpraca.html">Współpraca</a>
-        <a class="hover:text-gray-300" href="#">FAQ</a>
-        <a class="hover:text-gray-300" href="#">Oferta</a>
+        <a class="hover:text-gray-400" href="#">O mnie</a>
+        <a class="hover:text-gray-400" href="#">Portfolio</a>
+        <a class="hover:text-gray-400" href="wspolpraca.html">Współpraca</a>
+        <a class="hover:text-gray-400" href="#">FAQ</a>
+        <a class="hover:text-gray-400" href="#">Oferta</a>
       </div>
       <button id="menu-btn" class="md:hidden">
         <svg id="icon-hamburger" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,97 +58,140 @@
         </svg>
       </button>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-30 hidden">
+      <div id="menu-overlay" class="absolute inset-0 bg-black/70 opacity-0 transition-opacity"></div>
+      <div id="menu-panel"
+        class="absolute top-0 left-0 h-screen w-64 bg-primary text-white transform -translate-x-full transition-transform duration-300 flex flex-col p-6 space-y-6">
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="index.html"><i class="fas fa-house"></i><span>Strona Główna</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="omnie.html"><i class="fas fa-user"></i><span>O mnie</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="portfolio.html"><i class="fas fa-images"></i><span>Portfolio</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="wspolpraca.html"><i class="fas fa-handshake"></i><span>Współpraca</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-tags"></i><span>Oferta</span></a>
+      </div>
+    </div>
   </header>
 
   <!-- MAIN -->
-  <main class="pt-24">
+  <main class="pt-28 flex-grow">
+
+    <!-- Sekcja z obrazkiem -->
     <section class="py-12 md:py-24 lg:py-32">
-      <div class="container mx-auto px-4 md:px-6">
-        <div class="flex flex-col items-center text-center reveal">
-          <div class="mb-8 w-full max-w-sm">
-            <img alt="O Mnie" class="h-auto w-full rounded-lg object-cover" src="https://fotolabedz.com.pl/images/image/Zdjecia-biznesowe/biznesowe2.jpg"/>
-          </div>
-          <h1 class="text-3xl font-bold tracking-tighter text-black dark:text-white sm:text-4xl md:text-5xl">O Mnie</h1>
-          <p class="mx-auto mt-4 max-w-[700px] text-base text-black/70 dark:text-white/70 md:text-xl">
-            Jestem pasjonatką projektowania, która łączy kreatywność z technologią, aby tworzyć niezapomniane doświadczenia cyfrowe.
-          </p>
+      <div class="container mx-auto px-4 md:px-6 flex flex-col items-center text-center reveal">
+        <div class="mb-8 w-full max-w-sm md:max-w-md lg:max-w-lg">
+          <img alt="O Mnie" class="w-full h-auto rounded-lg object-cover" src="https://fotolabedz.com.pl/images/image/Zdjecia-biznesowe/biznesowe2.jpg"/>
         </div>
+        <h1 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">O Mnie</h1>
+        <p class="max-w-2xl text-base md:text-xl text-white/70">
+          Jestem pasjonatką projektowania, która łączy kreatywność z technologią, aby tworzyć niezapomniane doświadczenia cyfrowe.
+        </p>
       </div>
     </section>
 
     <!-- Liczniki -->
-    <section class="relative bg-primary py-16 px-6">
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 w-full max-w-6xl mx-auto">
-        <!-- 100% -->
-        <div class="flex flex-col items-center justify-center space-y-4 p-8 reveal">
+    <section class="relative bg-primary py-16">
+      <div class="container mx-auto px-4 md:px-6 flex flex-col sm:flex-row justify-center items-center gap-12 reveal">
+        <!-- Licznik 1 -->
+        <div class="flex flex-col items-center justify-center space-y-2 p-4">
           <h3 class="text-lg font-semibold uppercase tracking-widest text-white/70">Zadowolenie klientów</h3>
-          <div class="relative h-2 w-full overflow-hidden rounded-full bg-gray-700">
+          <div class="relative h-2 w-40 overflow-hidden rounded-full bg-gray-700">
             <div class="progress-bar absolute h-full bg-white" data-target="100"></div>
           </div>
-          <span class="text-5xl font-bold text-white counter" data-target="100">0%</span>
+          <span class="text-5xl font-bold counter" data-target="100">0%</span>
         </div>
-        <!-- 98% -->
-        <div class="flex flex-col items-center justify-center space-y-4 p-8 reveal">
-          <h3 class="text-lg font-semibold uppercase tracking-widest text-white/70">Dopasowanie do potrzeb</h3>
-          <div class="relative h-2 w-full overflow-hidden rounded-full bg-gray-700">
-            <div class="progress-bar absolute h-full bg-white" data-target="98"></div>
+        <!-- Licznik 2 -->
+      <div class="container mx-auto px-4 md:px-6 flex flex-col sm:flex-row justify-center items-center gap-12 reveal">
+        <!-- Licznik 1 -->
+        <div class="flex flex-col items-center justify-center space-y-2 p-4">
+          <h3 class="text-lg font-semibold uppercase tracking-widest text-white/70"></h3>
+          <div class="relative h-2 w-40 overflow-hidden rounded-full bg-gray-700">
+            <div class="progress-bar absolute h-full bg-white" data-target="98">Dopasowanie do potrzeb</div>
           </div>
-          <span class="text-5xl font-bold text-white counter" data-target="98">0%</span>
+          <span class="text-5xl font-bold counter" data-target="98">0%</span>
         </div>
+    </section>
+
+  </main>
 
   <!-- FOOTER -->
-  <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
+  <footer class="bg-primary text-white">
     <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8 text-center">
       <div class="flex justify-center space-x-6 mb-4">
-        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">O mnie</a>
-        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Kontakt</a>
-        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Polityka prywatności</a>
+        <a class="text-gray-400 hover:text-white" href="#">O mnie</a>
+        <a class="text-gray-400 hover:text-white" href="#">Kontakt</a>
+        <a class="text-gray-400 hover:text-white" href="#">Polityka prywatności</a>
       </div>
-      <p class="text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
+      <p class="text-sm text-gray-500">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
     </div>
   </footer>
 </div>
 
 <script>
-// ScrollReveal
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries, obs) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      obs.unobserve(entry.target);
+  // Menu mobilne
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const panel = document.getElementById("menu-panel");
+  const overlay = document.getElementById("menu-overlay");
+  const iconHamburger = document.getElementById("icon-hamburger");
+  const iconClose = document.getElementById("icon-close");
+
+  btn.addEventListener("click", () => {
+    if(menu.classList.contains("hidden")){
+      menu.classList.remove("hidden");
+      setTimeout(()=>{ overlay.classList.remove("opacity-0"); panel.classList.remove("-translate-x-full"); }, 10);
+      iconHamburger.classList.add("hidden");
+      iconClose.classList.remove("hidden");
+    } else {
+      overlay.classList.add("opacity-0");
+      panel.classList.add("-translate-x-full");
+      iconClose.classList.add("hidden");
+      iconHamburger.classList.remove("hidden");
+      setTimeout(()=> menu.classList.add("hidden"),300);
     }
   });
-}, { threshold: 0.2 });
-reveals.forEach(el => observer.observe(el));
 
-// Animacja liczników
-const counters = document.querySelectorAll(".counter");
-const bars = document.querySelectorAll(".progress-bar");
-
-const runCounters = (entries, observer) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      let counter = entry.target.querySelector(".counter");
-      let bar = entry.target.querySelector(".progress-bar");
-      let target = +counter.dataset.target;
-      let count = 0;
-
-      setTimeout(()=>{ bar.style.width = target + "%"; }, 300);
-
-      let interval = setInterval(() => {
-        count++;
-        counter.textContent = count + "%";
-        if(count >= target) clearInterval(interval);
-      }, 20);
-
-      observer.unobserve(entry.target);
-    }
+  overlay.addEventListener("click", () => {
+    overlay.classList.add("opacity-0");
+    panel.classList.add("-translate-x-full");
+    iconClose.classList.add("hidden");
+    iconHamburger.classList.remove("hidden");
+    setTimeout(()=> menu.classList.add("hidden"),300);
   });
-};
 
-const counterObserver = new IntersectionObserver(runCounters, { threshold: 0.4 });
-document.querySelectorAll(".reveal").forEach(el => counterObserver.observe(el));
+  // ScrollReveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Animacja liczników
+  const counterObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const counter = entry.target.querySelector(".counter");
+        const bar = entry.target.querySelector(".progress-bar");
+        const target = +counter.dataset.target;
+        let count = 0;
+        setTimeout(() => { bar.style.width = target + "%"; }, 300);
+        const interval = setInterval(() => {
+          count++;
+          counter.textContent = count + "%";
+          if(count >= target) clearInterval(interval);
+        }, 20);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll(".reveal").forEach(el => counterObserver.observe(el));
 </script>
 
 </body>
