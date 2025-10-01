@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="dark" lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Oferta — Gracjan Śliwiński</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#000",
+        "background-light": "#000",
+        "background-dark": "#000",
+      },
+      fontFamily: { 
+        display: ["Space Grotesk"],
+        logo: ["Petit Formal Script", "cursive"]
+      },
+    },
+  },
+};
+</script>
+
+<style>
+body { min-height: 100dvh; }
+.numberOfFont { font-family: 'Petit Formal Script', cursive; }
+.reveal { transition: all 1s ease-out; opacity: 0; filter: blur(5px); transform: translateY(20px); }
+.reveal.visible { opacity: 1; filter: blur(0); transform: translateY(0); }
+</style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative flex flex-col min-h-screen w-full justify-between overflow-x-hidden">
+
+  <!-- HEADER -->
+  <header class="absolute top-0 left-0 w-full z-20 px-9 py-7">
+    <nav class="container mx-auto flex items-center justify-between text-white">
+      <a class="text-base sm:text-xl font-bold numberOfFont" href="index.html">Gracjan Śliwiński</a>
+      <div class="hidden md:flex items-center space-x-6">
+        <a class="hover:text-gray-300" href="omnie.html">O mnie</a>
+        <a class="hover:text-gray-300" href="#">Portfolio</a>
+        <a class="hover:text-gray-300" href="wspolpraca.html">Współpraca</a>
+        <a class="hover:text-gray-300" href="#">FAQ</a>
+        <a class="hover:text-gray-300" href="oferta.html">Oferta</a>
+        <a class="hover:text-gray-300" href="kontakt.html">Kontakt</a>
+      </div>
+      <button id="menu-btn" class="md:hidden">
+        <svg id="icon-hamburger" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-30 hidden">
+      <div id="menu-overlay" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity"></div>
+      <div id="menu-panel" class="absolute top-0 left-0 h-screen w-64 bg-primary text-white transform -translate-x-full transition-transform duration-300 flex flex-col p-6 space-y-6">
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="index.html"><i class="fas fa-house"></i><span>Strona Główna</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="omnie.html"><i class="fas fa-user"></i><span>O mnie</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-images"></i><span>Portfolio</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="wspolpraca.html"><i class="fas fa-handshake"></i><span>Współpraca</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="#"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="oferta.html"><i class="fas fa-tags"></i><span>Oferta</span></a>
+        <a class="flex items-center space-x-3 hover:text-gray-300" href="kontakt.html"><i class="fas fa-envelope"></i><span>Kontakt</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 pt-40 pb-20 px-6 max-w-7xl mx-auto">
+    <section class="text-center mb-16 reveal">
+      <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-white">Oferta</h2>
+      <p class="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
+        Specjalizuję się w tworzeniu nowoczesnych i profesjonalnych rozwiązań, które pomogą Ci zaistnieć w internecie.
+      </p>
+    </section>
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+  <!-- Wycena Projektu -->
+  <div class="bg-neutral-900 p-6 rounded-xl border border-neutral-800 hover:border-neutral-700 transition-all duration-300 group reveal">
+    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6 group-hover:bg-neutral-700 transition-colors">
+      <i class="fa-solid fa-calculator text-2xl"></i> <!-- dopasowana ikona -->
+    </div>
+    <h3 class="text-xl font-bold mb-2 text-white flex items-center justify-between">
+      Wycena Projektu
+    </h3>
+    <p class="text-gray-400">Umawiamy się na niezobowiązującą rozmowę, podczas której omawiamy Twoje potrzeby i oczekiwania...</p>
+  </div>
+
+  <!-- Projekt Indywidualny -->
+  <div class="bg-neutral-900 p-6 rounded-xl border border-neutral-800 hover:border-neutral-700 transition-all duration-300 group reveal">
+    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6 group-hover:bg-neutral-700 transition-colors">
+      <i class="fa-solid fa-pencil-ruler text-2xl"></i>
+    </div>
+    <h3 class="text-xl font-bold mb-2 text-white flex items-center justify-between">
+      Projekt Indywidualny
+      <span class="text-red-500 text-sm ml-2">Najczęściej wybierane</span>
+    </h3>
+    <p class="text-gray-400">Kompleksowa realizacja projektu od podstaw z użyciem zaawansowanych rozwiązań...</p>
+  </div>
+
+  <!-- One Page -->
+  <div class="bg-neutral-900 p-6 rounded-xl border border-neutral-800 hover:border-neutral-700 transition-all duration-300 group reveal">
+    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6 group-hover:bg-neutral-700 transition-colors">
+      <i class="fa-solid fa-file-lines text-2xl"></i> <!-- dopasowana ikona -->
+    </div>
+    <h3 class="text-xl font-bold mb-2 text-white">One Page</h3>
+    <p class="text-gray-400">Tworzę jednostronicowe strony internetowe idealnie dopasowane do Twojej marki i potrzeb...</p>
+  </div>
+
+  <!-- Projekt Podstawowy -->
+  <div class="bg-neutral-900 p-6 rounded-xl border border-neutral-800 hover:border-neutral-700 transition-all duration-300 group reveal">
+    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6 group-hover:bg-neutral-700 transition-colors">
+      <i class="fa-solid fa-box-open text-2xl"></i> <!-- dopasowana ikona -->
+    </div>
+    <h3 class="text-xl font-bold mb-2 text-white">Projekt Podstawowy</h3>
+    <p class="text-gray-400">Pakiet zaprojektowany z myślą o prostych, funkcjonalnych stronach opartych na gotowych szablonach...</p>
+  </div>
+</div>
+
+
+  <!-- FOOTER -->
+  <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
+    <div class="mx-auto max-w-7xl px-6 py-12 text-center">
+      <div class="flex justify-center space-x-6 mb-4">
+        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="omnie.html">O mnie</a>
+        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="kontakt.html">Kontakt</a>
+        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Polityka prywatności</a>
+      </div>
+      <p class="text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+const btn = document.getElementById("menu-btn");
+const menu = document.getElementById("mobile-menu");
+const panel = document.getElementById("menu-panel");
+const overlay = document.getElementById("menu-overlay");
+const iconHamburger = document.getElementById("icon-hamburger");
+const iconClose = document.getElementById("icon-close");
+
+btn.addEventListener("click", () => {
+  if (menu.classList.contains("hidden")) {
+    menu.classList.remove("hidden");
+    setTimeout(() => { overlay.classList.remove("opacity-0"); panel.classList.remove("-translate-x-full"); }, 10);
+    iconHamburger.classList.add("hidden"); iconClose.classList.remove("hidden");
+  } else {
+    overlay.classList.add("opacity-0"); panel.classList.add("-translate-x-full");
+    iconClose.classList.add("hidden"); iconHamburger.classList.remove("hidden");
+    setTimeout(() => menu.classList.add("hidden"), 300);
+  }
+});
+
+overlay.addEventListener("click", () => {
+  overlay.classList.add("opacity-0"); panel.classList.add("-translate-x-full");
+  iconClose.classList.add("hidden"); iconHamburger.classList.remove("hidden");
+  setTimeout(() => menu.classList.add("hidden"), 300);
+});
+
+// ScrollReveal z sekwencyjnym opóźnieniem
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries, obs) => {
+  entries.forEach((entry, i) => {
+    if(entry.isIntersecting){
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 200); // 200ms opóźnienia między elementami
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+reveals.forEach(el => observer.observe(el));
+
+</script>
+
+</body>
+</html>
