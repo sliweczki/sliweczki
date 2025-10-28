@@ -2,368 +2,838 @@
 <html class="dark" lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet"/>
-<title>Stitch Design</title>
-<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gym Website</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
 <script>
 tailwind.config = {
-    darkMode: "class",
-    theme: {
-        extend: {
-            colors: {
-                "primary": "#000",              
-                "background-light": "#000",     
-                "background-dark": "#000",    
-            },
-            fontFamily: {
-                "display": ["Space Grotesk"]
-            },
-            borderRadius: {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-            },
-        },
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#ea2a33",
+        "background-light": "#f8f6f6",
+        "background-dark": "#181111",
+      },
+      fontFamily: {
+        "display": ["Lexend", "Noto Sans", "sans-serif"]
+      },
     },
+  },
 }
 </script>
+
 <style>
-body {
-    min-height: max(884px, 100dvh);
+s {
+  text-decoration-color: #ea2a33;
+  text-decoration-thickness: 0.2rem;
 }
-.numberOfFont {
-    font-family: 'Petit Formal Script', cursive;
+
+.parallax {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-1 * (100vw - 100%) / 2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.reveal {
-  transition: all 1s ease-out;
+.parallax::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+.parallax > * { position: relative; z-index: 2; }
+@media (min-width: 768px) {
+  .parallax { background-position: center 10%; }
+}
+body { min-height: max(884px, 100dvh); }
+main > section { margin-top: 6rem; margin-bottom: 6rem; }
+html { scroll-behavior: smooth; }
+
+/* === ANIMACJE === */
+.fade-in {
   opacity: 0;
-  filter: blur(5px);
-  transform: translateY(20px);
+  transform: translateY(40px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
 }
-.reveal.visible {
+.fade-in.visible {
   opacity: 1;
-  filter: blur(0);
   transform: translateY(0);
 }
-.parallax {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+[data-delay] { transition-delay: var(--delay, 0s); }
+
+/* Efekt pisania */
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #ea2a33;
+  animation: typing 2s steps(25, end), blink 0.7s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Fade-in dla startu strony */
+@keyframes appear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.start-fade {
+  opacity: 0;
+  animation: appear 0.8s ease-out forwards;
+}
+
+/* Hamburger animacja */
+.hamburger {
+  position: relative;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.hamburger span {
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 8px; }
+.hamburger span:nth-child(3) { top: 16px; }
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 8px;
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 8px;
 }
 </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
 
-<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden">
-  <!-- HEADER -->
-  <header class="absolute top-0 left-0 w-full z-20 px-9 py-7">
-    <nav class="container mx-auto flex items-center justify-between text-white">
-      <a class="text-base sm:text-xl font-bold numberOfFont" href="index.html">Gracjan Śliwiński</a>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
 
-      <div class="hidden md:flex items-center space-x-6">
-        <a class="hover:text-gray-300" href="omnie.html">O mnie</a>
-        <a class="hover:text-gray-300" href="portfolio.html">Portfolio</a>
-        <a class="hover:text-gray-300" href="wspolpraca.html">Współpraca</a>
-        <a class="hover:text-gray-300" href="oferta.html">Oferta</a>
-        <a class="hover:text-gray-300" href="kontakt.html">Kontakt</a>
+      <!-- Ikony społecznościowe -->
+      <div class="flex space-x-6 text-white">
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="social-icon">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://tiktok.com" target="_blank" aria-label="TikTok" class="social-icon">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="social-icon">
+          <i class="fab fa-facebook"></i>
+        </a>
       </div>
 
-      <button id="menu-btn" class="md:hidden">
-        <!-- Hamburger -->
-        <svg id="icon-hamburger" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 6h16M4 12h16m-7 6h7"
-            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-        </svg>
-        <!-- X -->
-        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 18L18 6M6 6l12 12"
-            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-        </svg>
+      <style>
+      .social-icon i {
+        font-size: 20px;
+        display: inline-block;
+        transition: transform 0.3s ease, opacity 0.6s ease;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .social-icon i.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .social-icon:hover i {
+        transform: scale(1.2) rotate(15deg);
+      }
+      </style>
+
+      <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.social-icon i').forEach((el, index) => {
+          setTimeout(() => el.classList.add('fade-in'), index * 100);
+        });
+      });
+      </script>
+
+      <!-- MENU GŁÓWNE (desktop) -->
+      <nav class="hidden md:flex space-x-6 text-white">
+        <a href="#home" class="relative group">Home<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
+        <a href="#gallery" class="relative group">Gallery<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
+        <a href="#youtube" class="relative group">Partners<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
+        <a href="#stats" class="relative group">Our Stats<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
+        <a href="#contact" class="relative group">Newsletter<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
+      </nav>
+
+      <!-- MENU MOBILNE -->
+      <div id="menuToggle" class="hamburger md:hidden z-50">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAWIGACJA MOBILNA -->
+  <nav id="mobileNav"
+    class="fixed top-0 left-0 w-full bg-background-dark/95 backdrop-blur-md text-white flex flex-col items-center justify-center space-y-6 transform -translate-y-full opacity-0 transition-all duration-500 ease-in-out md:hidden h-screen z-40">
+    <a href="#Home" class="text-lg hover:text-primary">Home</a>
+    <a href="#gallery" class="text-lg hover:text-primary">Gallery</a>
+    <a href="#youtube" class="text-lg hover:text-primary">Partners</a>
+    <a href="#stats" class="text-lg hover:text-primary">Our Stats</a>
+    <a href="#contact" class="text-lg hover:text-primary">Newsletter</a>
+  </nav>
+</header>
+
+<!-- === MAIN === -->
+<main>
+  <div id="home" class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+    <div class="parallax flex flex-col items-center justify-center gap-6 p-6 text-white w-full min-h-screen" style='background-image: url("awwag2.jpg");'>
+      <div class="flex flex-col gap-4 text-center">
+        <h1 class="text-white text-4xl font-black @[480px]:text-5xl fade-in">Michał Koziar</h1>
+        <h2 class="text-white text-base fade-in"><s>Wymówki</s> Nie ma takiej mozliwości, po prostu z dnia na dzień Tworzę...</h2>
+      </div>
+      <button id="join-btn" class="flex fade-in items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-base font-bold hover:opacity-90 transition">
+        <span class="truncate">Dołącz do społeczności</span>
       </button>
-
-    </nav>
-
-    <div id="mobile-menu" class="fixed inset-0 z-30 hidden">
-      <div id="menu-overlay" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity"></div>
-      <div id="menu-panel"
-        class="absolute top-0 left-0 h-screen w-64 bg-primary text-white transform -translate-x-full transition-transform duration-300 flex flex-col p-6 space-y-6">
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="index.html"><i class="fas fa-house"></i><span>Strona Główna</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="kontakt.html"><i class="fa-solid fa-address-book"></i><span>Kontakt</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="oferta.html"><i class="fas fa-tags"></i><span>Oferta</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="portfolio.html"><i class="fas fa-images"></i><span>Portfolio</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="wspolpraca.html"><i class="fas fa-handshake"></i><span>Współpraca</span></a>
-        <a class="flex items-center space-x-3 hover:text-gray-300" href="omnie.html"><i class="fas fa-user"></i><span>O mnie</span></a>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO PARALLAX -->
-<div class="p-4 @container">
-  <div class="relative flex min-h-[90vh] max-w-3xl lg:max-w-[calc(100%-64px)] mx-auto flex-col gap-6 overflow-hidden bg-cover bg-center bg-no-repeat rounded-xl p-6 @[480px]:gap-8 items-start justify-end parallax" style='background-image: url("backgroundfix.jpg");'>
-    <div class="absolute inset-0 bg-black/50 rounded-xl"></div>
-    <div class="relative flex flex-col gap-4 text-left z-10">
-      <h1 class="text-white text-4xl font-bold leading-tight tracking-tight @[480px]:text-6xl">Potrzebujesz Strony Internetowej?</h1>
-      <p class="text-gray-200 text-base font-normal leading-normal @[480px]:text-lg max-w-2xl">
-        Specjalizuję się w tworzeniu nowoczesnych, profesjonalnych stron internetowych o minimalistycznej estetyce, wykorzystując wysokiej jakości wizualizacje i efekty paralaksy w celu poprawy doświadczeń użytkownika.
-      </p>
-    </div>
-    <a class="relative z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-wide transition-colors hover:bg-opacity-90" href="#about-section">
-      <span class="truncate">Czytaj dalej</span>
-    </a>
-  </div>
-</div>
-
-
-  <!-- CONTENT -->
-  <div id="about-section" class="flex flex-col gap-4 reveal">
-    <div class="flex flex-col gap-12 px-4 py-16 @container sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-4 text-center items-center">
-        <h2 class="text-gray-900 dark:text-white text-3xl font-bold leading-tight tracking-tight @[480px]:text-5xl max-w-3xl">Moje Podejście</h2>
-        <p class="text-gray-600 dark:text-gray-400 text-lg font-normal leading-normal max-w-3xl">
-          Koncentruję się na tworzeniu wizualnie oszałamiających stron internetowych, które są zarówno funkcjonalne, jak i przyjazne dla użytkownika. Moje projekty wykorzystują przewijanie paralaksy, aby dodać głębi i zaangażowania.
-        </p>
-      </div>
     </div>
   </div>
+</main>
 
-<!-- OPINIE (SLIDER) -->
-<section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#1a1a1a] dark:bg-[#0e0e0e] reveal">
-  <h2 class="text-center text-white text-3xl font-bold mb-10">Opinie Klientów</h2>
+<!-- === POPUP (pewny fallback + optional blur) === -->
+<div id="popup"
+     class="fixed inset-0 hidden items-center justify-center z-50 transition-opacity duration-300 opacity-0"
+     style="background-color: rgba(0,0,0,0.6); /* fallback gdy bg-black/60 nie działa */
+            -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); /* opcjonalny blur */">
+<div id="popup-box" class="bg-black text-white rounded-2xl p-6 w-80 flex flex-col items-center gap-4 border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+       style="animation: popupIn 300ms ease forwards;">
+    <h3 class="text-xl font-bold text-center">Dołącz do społeczności</h3>
+    <div class="flex flex-col gap-3 w-full">
+  <a href="https://www.instagram.com/michal.koziar/" target="_blank"
+     class="w-full text-center bg-pink-700 text-white py-2 rounded-lg hover:bg-pink-600 transition">
+     Instagram
+  </a>
 
-<!-- Przycisk Dodaj Opinię -->
-<div class="flex justify-center my-8">
-  <a href="https://www.google.com/search?sa=X&sca_esv=a95b1a567a7f3cbf&tbm=lcl&sxsrf=AE3TifNWlWxUSb4GHTOdjNU8M2j0OiwS_w:1760006832714&q=gracjan%20%C5%9Bliwi%C5%84ski%20-%20tworzenie%20stron%20internetowych%20opinie&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxI2NDUxMzYzNzQwMjMzMbYwBnI3MDK-YrRKL0pMzkrMUzg6OyezPPNoS3F2poKuQkl5flFVal5mqkJxSVF-nkJmXklqUV5qSX55ZXKGQn5BJlBqESsFmgFakANVlAAAAA&rldimm=1546367102664383546&hl=pl-PL&ved=0CAgQ5foLahcKEwigqfmt-JaQAxUAAAAAHQAAAAAQBQ&biw=1920&bih=992&dpr=1#lkt=LocalPoiReviews&arid=Ci9DQUlRQUNvZENodHljRjlvT2s1MWRXWnBObGxHY1RsRE9FY3pjRVozVFhwUWFXYxAB&lrd=0x6439cad4ffe81223:0x1575ccafd6a91c3a,3,,,," target="_blank"
-     class="flex items-center gap-2 px-5 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white 
-            rounded-lg shadow hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-    <img src="https://www.google.com/favicon.ico" alt="Google" class="w-5 h-5">
-    <span>Dodaj opinię</span>
+  <a href="https://www.tiktok.com/@michalzetoro" target="_blank"
+     class="w-full text-center bg-[#3a006e] text-white py-2 rounded-lg hover:bg-[#52009e] transition">
+     TikTok
+  </a>
+
+  <a href="https://www.youtube.com/channel/UCcxfnQqSkaQWV03TykKhcTg" target="_blank"
+     class="w-full text-center bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">
+     YouTube
   </a>
 </div>
 
-  <div class="relative overflow-hidden max-w-5xl mx-auto">
-    <div id="opinie-slider" class="flex transition-transform duration-700 ease-in-out">
-      <!-- Opinia 1 -->
-      <div class="min-w-full px-4">
-        <div class="bg-[#2a2a2a] rounded-lg shadow-lg p-8 text-center">
-          <div class="flex justify-center mb-3 text-yellow-400">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
+<button id="close-popup"
+        class="mt-4 text-sm text-gray-400 hover:text-white transition">
+  Zamknij
+</button>
+  </div>
+</div>
 
-          <p id="review-text" class="text-gray-300 italic mb-2 overflow-hidden transition-[max-height] duration-700 ease-in-out max-h-[100px]">
-            "Chciałbym serdecznie podziękować Gracjanowi za stworzenie wspaniałej strony internetowej. Współpraca była czystą
-            przyjemnością od pierwszej do ostatniej minuty. Gracjan to nie tylko utalentowany profesjonalista, ale także osoba,
-            która z cierpliwością i zaangażowaniem podchodzi do projektu klienta. Każdy szczegół strony został w pełni
-            dopracowany. Dzięki temu czułem się zaopiekowany, a efekt finalny przerósł moje najśmielsze oczekiwania. Strona
-            działa doskonale i już przynosi pierwsze pozytywne efekty. Z całego serca polecam."
-          </p>
+<style>
+  @keyframes popupIn {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes popupOut {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to   { opacity: 0; transform: translateY(8px) scale(0.98); }
+  }
+</style>
 
-          <button id="read-more" class="text-gray-400 text-sm hover:text-gray-300 mt-1 focus:outline-none">
-            Czytaj dalej
-          </button>
+<script>
+  const btn = document.getElementById('join-btn');
+  const popup = document.getElementById('popup');
+  const popupBox = document.getElementById('popup-box');
+  const closeBtn = document.getElementById('close-popup');
 
-          <h3 class="text-white font-semibold flex items-center justify-center gap-2 mt-4">
-            Marcin Śliwiński
-            <img src="verified.png" alt="verified" width="18" height="18" class="inline-block">
-          </h3>
-        </div>
-      </div>
+  function showPopup() {
+    // pokaż kontener (hidden -> flex) i triggeruj przejście opacity
+    popup.classList.remove('hidden');
+    popup.classList.add('flex');
+
+    // wymuś reflow żeby transition zadziałało poprawnie
+    // (czyli przeglądarka "widzi" zmianę opakowania)
+    void popup.offsetHeight;
+
+    popup.classList.remove('opacity-0');
+    popup.classList.add('opacity-100');
+
+    // upewnij się, że box ma wejściową animację
+    popupBox.style.animation = 'popupIn 300ms ease forwards';
+  }
+
+  function hidePopup() {
+    // animacja out dla boxa
+    popupBox.style.animation = 'popupOut 220ms ease forwards';
+
+    // ukryj zasłonę (przez opacity), ale poczekamy na koniec transition aby usunąć flex/hidden
+    popup.classList.remove('opacity-100');
+    popup.classList.add('opacity-0');
+
+    // czekaj na koniec transition opacity (bez setTimeout)
+    function onTransitionEnd(e) {
+      if (e.propertyName === 'opacity') {
+        popup.removeEventListener('transitionend', onTransitionEnd);
+        popup.classList.remove('flex');
+        popup.classList.add('hidden');
+        // przywróć domyślną animację boxa na przyszłość
+        popupBox.style.animation = '';
+      }
+    }
+    popup.addEventListener('transitionend', onTransitionEnd);
+  }
+
+  btn.addEventListener('click', showPopup);
+  closeBtn.addEventListener('click', hidePopup);
+
+  // dodatkowo: kliknięcie poza boxem zamyka popup
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) hidePopup();
+  });
+
+  // ESC zamyka
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !popup.classList.contains('hidden')) hidePopup();
+  });
+</script>
+
+
+
+<section id="services" class="mt-20">
+  <h2 class="text-gray-800 dark:text-white text-[24px] font-bold px-6 pb-6 fade-in">Krótko O Mnie</h2>
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 p-6">
+    <div class="fade-in flex flex-col gap-4 rounded-lg border border-gray-200 dark:border-[#533c3d] bg-background-light dark:bg-[#261c1c] p-6">
+      <div class="text-primary"><span class="material-symbols-outlined">fitness_center</span></div>
+      <h3 class="text-gray-900 dark:text-white text-base font-bold">Trening</h3>
+      <p class="text-gray-600 dark:text-[#b89d9f] text-sm">W moim zyciu trening to podstawa, więc aktywnie trenuje od X lat, budując przy tym kozacką formę zycia.</p>
     </div>
-
-    <!-- Nawigacja -->
-    <div class="flex justify-center gap-3 mt-6">
-      <button id="prev" class="text-gray-400 hover:text-white">
-        <i class="fa-solid fa-chevron-left"></i>
-      </button>
-      <button id="next" class="text-gray-400 hover:text-white">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
+    <div class="fade-in flex flex-col gap-4 rounded-lg border border-gray-200 dark:border-[#533c3d] bg-background-light dark:bg-[#261c1c] p-6">
+      <div class="text-primary"><span class="material-symbols-outlined">groups</span></div>
+      <h3 class="text-gray-900 dark:text-white text-base font-bold">Człowiek renesansu</h3>
+      <p class="text-gray-600 dark:text-[#b89d9f] text-sm">Sawiam na produkywne spędzanie czasu, więc tylko jak mam chwilę czasu wolnego tworzę ale tez nowe narzedzia ktre pomagaja mi utrzymac dyscypline oraz forme</p>
+    </div>
+    <div class="fade-in flex flex-col gap-4 rounded-lg border border-gray-200 dark:border-[#533c3d] bg-background-light dark:bg-[#261c1c] p-6">
+      <div class="text-primary"><span class="material-symbols-outlined">self_improvement</span></div>
+      <h3 class="text-gray-900 dark:text-white text-base font-bold">Społeczność na IG</h3>
+      <p class="text-gray-600 dark:text-[#b89d9f] text-sm"></p>
+      <span class="text-3xl dark:text-[#b89d9f]" data-counter="74000">0</span>
+    </div>
+    <div class="fade-in flex flex-col gap-4 rounded-lg border border-gray-200 dark:border-[#533c3d] bg-background-light dark:bg-[#261c1c] p-6">
+      <div class="text-primary"><span class="material-symbols-outlined">self_improvement</span></div>
+      <h3 class="text-gray-900 dark:text-white text-base font-bold">Społeczność na TikTok</h3>
+      <p class="text-gray-600 dark:text-[#b89d9f] text-sm"></p>
+      <span class="text-3xl dark:text-[#b89d9f]" data-counter="156000">0</span>
     </div>
   </div>
 </section>
 
 
+  <!-- === GALERIA === -->
+  <section id="gallery" class="mt-20">
+    <h2 class="fade-in text-gray-800 dark:text-white text-[24px] font-bold px-6 pb-6">Moje Sposoby</h2>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-12 p-6">
+      <div class="fade-in bg-cover bg-center flex flex-col justify-end p-6 aspect-square rounded-lg" data-delay="0s" style='background-image: linear-gradient(0deg, rgba(0,0,0,.6), rgba(0,0,0,0)), url("zetttoro.jpeg");'><p class="text-white text-lg font-bold w-4/5">Wszystko stworzonę na miarę moich wymagań</p></div>
+      <div class="fade-in bg-cover bg-center flex flex-col justify-end p-6 aspect-square rounded-lg" data-delay="0.2s" style='background-image: linear-gradient(0deg, rgba(0,0,0,.6), rgba(0,0,0,0)), url("zettoro.jpg");'><p class="text-white text-lg font-bold w-4/5">Trening to podstawa bracie!</p></div>
+    </div>
+  </section>
 
-<script>
-  // --- Slider logic ---
-  const slider = document.getElementById('opinie-slider');
-  const slides = slider.children.length;
-  let index = 0;
+  <section class="bg-background-dark py-16 md:py-24" id="about" class="mt-20">
+<h2 class="fade-in text-gray-800 dark:text-white text-[24px] font-bold px-6 pb-6">Moja droga</h2>
+  <div class="container mx-auto flex flex-col items-center gap-10 px-4 md:px-6">
+    <div class="max-w-3xl text-center fade-in">
 
-  function updateSlider() {
-    slider.style.transform = `translateX(-${index * 100}%)`;
-  }
+      <div class="timeline-container text-left mt-12 relative">
+        
+        <!-- Pasek -->
+        <div class="timeline-line" id="timelineLine"></div>
 
-  if (slides > 1) {
-    document.getElementById('next').addEventListener('click', () => {
-      index = (index + 1) % slides;
-      updateSlider();
-    });
-
-    document.getElementById('prev').addEventListener('click', () => {
-      index = (index - 1 + slides) % slides;
-      updateSlider();
-    });
-
-    setInterval(() => {
-      index = (index + 1) % slides;
-      updateSlider();
-    }, 6000);
-  }
-
-  // --- Read more logic with smoother animation ---
-  const readMoreBtn = document.getElementById('read-more');
-  const reviewText = document.getElementById('review-text');
-  let expanded = false;
-
-  readMoreBtn.addEventListener('click', () => {
-    if (!expanded) {
-      const fullHeight = reviewText.scrollHeight;
-      reviewText.style.maxHeight = fullHeight + 'px';
-      readMoreBtn.textContent = 'Zwiń';
-    } else {
-      reviewText.style.maxHeight = '100px';
-      readMoreBtn.textContent = 'Czytaj dalej';
-    }
-    expanded = !expanded;
-  });
-</script>
-
-
-  <!-- BLOK 3 KAFELKI -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-3 @[480px]:gap-6">
-      <!-- Kafelek 1 -->
-      <div class="flex flex-col gap-4 reveal">
-        <div class="w-full aspect-video bg-cover bg-center rounded-lg"
-          style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBVGEIIhwLECdBkg2XmXWyT6lUMJqA28Gi5GLGLP7mXha76Ynt1dqZQgxUbR9NdKbRj1-P-DzsprCUYHhRuGhsLu2_i3oUSFxUrbA5HzX20H8cW_LHTBPRIzHvPD46M_X_BJktaOCg2zhSI08atLLiItJYEeNjwO176PQQA6T6W4EDag8MPPDfXw3HQnxjctHNNFs397QbnIi5JngLOjE2Ep1ytSuS0cBfQLyNXpabUExGHugFtB7v6nziRpxgX0bRWOzsawQXBks4");'>
+        <!-- Punkty osi czasu -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h4 class="font-bold text-lg">2008 - Początek przygody</h4>
+            <p class="dark:text-[#b89d9f]" >Zaczynałem w garażu z jednym hantlem i ogromną motywacją. Pierwsze pompki, pierwsze porażki, ale wiedziałem, że chcę więcej niż przeciętność.</p>
+          </div>
         </div>
-        <div>
-          <h3 class="text-gray-900 dark:text-white text-xl font-bold">Wizualna Doskonałość</h3>
-          <p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
-            Priorytetem dla mnie są wysokiej jakości wizualizacje i minimalistyczna estetyka, aby tworzyć strony internetowe, które są zarówno piękne, jak i skuteczne.
-          </p>
-        </div>
-      </div>
 
-      <!-- Kafelek 2 -->
-      <div class="flex flex-col gap-4 reveal">
-        <div class="w-full aspect-video bg-cover bg-center rounded-lg"
-          style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHWtEWIC2cQLKpwHDKbi942qzwrwNOy3skd_J3HghtIJHSdHgzBlZmkhNdBj0-O2NztI9L_gek-O83wCT0GTiqCumx7Wp_vNDfm7o1aW7Qd8p3oafhA0dYsrbiayvicpyOKjc4BQWBw_xq8VfR8wD7YEHQVLG_eR8yKlW8nCSpsFMa3ELyfZ7lAIs1UCUKlggGAJ79sd77kPaCV3zsyGmXKObw4Mp2sbFoo3vxDT3y0rvo-JPXahHKobL2LErlRfOqDUgsJbU1qSg");'>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h4 class="font-bold text-lg">2011 - Pierwsze sukcesy</h4>
+            <p class="dark:text-[#b89d9f]" >Zdobyłem swoje pierwsze medale w lokalnych zawodach fitness. To wtedy poczułem, że trening to nie tylko hobby, to styl życia i sposób na wygrywanie z samym sobą.</p>
+          </div>
         </div>
-        <div>
-          <h3 class="text-gray-900 dark:text-white text-xl font-bold">Funkcjonalny Design</h3>
-          <p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
-            Moje projekty są nie tylko atrakcyjne wizualnie, ale także zoptymalizowane pod kątem wydajności i użyteczności.
-          </p>
-        </div>
-      </div>
 
-      <!-- Kafelek 3 -->
-      <div class="flex flex-col gap-4 reveal">
-        <div class="w-full aspect-video bg-cover bg-center rounded-lg"
-          style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFEH2tNM9uRy_z4Q2K4DsVBTPJ7VpX-m4gpkMQq4e3viLZ_qxg6i5ODgdcXby5XHnrWCS3Kskn6qiwQq44om9kGtgu31VrRTaUEGFD1jfs9Pedsjw0Nrp0PZ_DEYWCYkerL2lW30GGH5cbEfbjRv8_MhFlxRXCqJa-6fRUhpkrBo9ZQr5d4YZBa_AvDt1bgZ6LYkNix4IFIJbxCzbT-k7MY9Cj89NPYs-c1qfH5LxF4EUzLDE_Ngr56xOlRLAn1QjYnYbXg");'>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h4 class="font-bold text-lg">2014 - Powstanie Zetoro</h4>
+            <p class="dark:text-[#b89d9f]" >Otworzyłem siłownię w starej stodole. To był ryzykowny start, ale czułem, że to moja misja i nikt tego nie zrobi za mnie.</p>
+          </div>
         </div>
-        <div>
-          <h3 class="text-gray-900 dark:text-white text-xl font-bold">Angażujące Doświadczenie</h3>
-          <p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
-            Używam przewijania paralaksy i innych interaktywnych elementów, aby stworzyć dynamiczne i angażujące doświadczenie użytkownika.
-          </p>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h4 class="font-bold text-lg">2017 - Rozwój społeczności</h4>
+            <p class="dark:text-[#b89d9f]" >Kanały YouTube i TikTok zaczęły rosnąć, a społeczność szybko się powiększała. Ludzie oglądali mój content, codzienne życie i to dawało mi niesamowitą energię do dalszego działania.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h4 class="font-bold text-lg">2020 - Współpraca z markami</h4>
+            <p class="dark:text-[#b89d9f]" >Rozpocząłem pierwsze poważne współprace ze znanymi markami fitness m.in. <a href="https://wkdzik.pl/" target="_blank" style="color: yellow;">WkDzik</a>. Wreszcie pasja zaczęła przynosić realne efekty i możliwość rozwoju biznesowego.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h4 class="font-bold text-lg">2023 - Ekspansja online</h4>
+            <p class="dark:text-[#b89d9f]" >Moje social media eksplodowały, setki tysięcy obserwujących, miliony obejrzeń. ZETORO przestało być lokalne i stało się miejscem znanym w całej Polsce.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h4 class="font-bold text-lg">2025 - Plany na przyszłość</h4>
+            <p class="dark:text-[#b89d9f]" >Planuję rozszerzenie ZETORO, stworzenie własnej linii sprzętu i suplementów. Cel jest prosty: inspirować, pokazywać, że dyscyplina i codzienny wysiłek naprawdę się opłacają.</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
-    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-      <div class="flex items-center justify-center space-x-6">
-        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="index.html">Home</a>
-        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="kontakt.html">Kontakt</a>
-        <a class="text-gray-500 hover:text-gray-900 dark:hover:text-white" href="#">Polityka prywatności</a>
-      </div>
-      <p class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Gracjan Śliwiński. Wszelkie prawa zastrzeżone.</p>
+</section>
+<section id="about-me" class="bg-background-dark py-20 px-6">
+  <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
+    <!-- Zdjęcie -->
+    <div class="md:w-1/2 flex justify-center">
+    <img src="zetoropdcst.jpeg" alt="Michał Koziar"
+        class="fade-in rounded-2xl shadow-[0_0_40px_rgba(234,42,51,0.25)] w-5/6 sm:w-2/3 md:w-[90%] lg:w-[100%] max-w-md object-cover transition-all duration-300">
     </div>
-  </footer>
+
+    <!-- Tekst -->
+    <div class="md:w-1/2 text-center md:text-left fade-in">
+      <h2 class="text-white text-3xl font-bold mb-4">Kim jestem?</h2>
+      <p class="text-gray-400 text-base leading-relaxed mb-4">
+        Nazywam się <span class="text-primary font-semibold">Michał Koziar</span> — pasjonat treningu, dyscypliny i codziennego rozwoju. 
+        Nie interesują mnie półśrodki ani wymówki. Każdy dzień to okazja, by być lepszym niż wczoraj. 
+      </p>
+      <p class="text-gray-400 text-base leading-relaxed mb-4">
+        Zaczynałem od prostych treningów w garażu, dziś tworzę przestrzeń, która inspiruje innych do działania. 
+        Pokazuję, że można osiągnąć wszystko, jeśli przestaniesz gadać, a zaczniesz działać.
+      </p>
+      <p class="text-gray-400 text-base leading-relaxed">
+        Zetoro to nie tylko siłownia — to inspirujący styl życia. Jeśli tu jesteś, to znaczy, że też czujesz, że <s>NIE DA SIĘ</s> nie istnieje.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<style>
+.timeline-container {
+  position: relative;
+  max-width: 50rem; /* 800px */
+  margin: 0 auto;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 3.125rem; /* 50px */
+  margin-bottom: 3.75rem; /* 60px */
+  opacity: 0;
+  transform: translateY(1.875rem); /* 30px */
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -0.125rem; /* -2px */
+  top: 0; /* wcześniej 8px */
+  width: 1.25rem; /* 20px */
+  height: 1.25rem; /* 20px */
+  border-radius: 50%;
+  background-color: #ea2a34;
+  z-index: 2;
+  box-shadow: 0 0 0.625rem #ffffff, 0 0 1.25rem rgba(255,94,0,0.5); /* 10px, 20px */
+}
+
+.timeline-line {
+  position: absolute;
+  left: 0.5rem; /* 8px */
+  top: 0.625rem; /* 10px */
+  width: 0.1875rem; /* 3px */
+  height: 0;
+  background: linear-gradient(to bottom, #ea2a33 0%, #ea2a33 50%, #ea2a33 100%);
+  box-shadow: 0 0 0.75rem rgba(53, 25, 96, 0.7); /* 12px */
+  z-index: 1;
+  border-radius: 0.125rem; /* 2px */
+  transition: height 0.15s linear;
+}
+
+.timeline-content {
+  background: rgba(30, 30, 30, 0.7);
+  padding: 1.25rem; /* 20px */
+  border-radius: 0.5rem; /* 8px */
+  border-left: 0.1875rem solid #ea2a33; /* 3px */
+  color: white;
+}
+</style>
+
 
 <script>
-  const btn = document.getElementById("menu-btn");
-  const menu = document.getElementById("mobile-menu");
-  const panel = document.getElementById("menu-panel");
-  const overlay = document.getElementById("menu-overlay");
-  const iconHamburger = document.getElementById("icon-hamburger");
-  const iconClose = document.getElementById("icon-close");
+window.addEventListener('scroll', () => {
+  const section = document.querySelector('#about');
+  const line = document.querySelector('#timelineLine');
+  const items = section.querySelectorAll('.timeline-item');
+  const rect = section.getBoundingClientRect();
+  const scrollY = window.scrollY;
+  const windowHeight = window.innerHeight;
 
-  btn.addEventListener("click", () => {
-    if (menu.classList.contains("hidden")) {
-      menu.classList.remove("hidden");
-      setTimeout(() => {
-        overlay.classList.remove("opacity-0");
-        panel.classList.remove("-translate-x-full");
-      }, 10);
-      iconHamburger.classList.add("hidden");
-      iconClose.classList.remove("hidden");
-    } else {
-      overlay.classList.add("opacity-0");
-      panel.classList.add("-translate-x-full");
-      iconClose.classList.add("hidden");
-      iconHamburger.classList.remove("hidden");
-      setTimeout(() => menu.classList.add("hidden"), 300);
-    }
-  });
+  if (rect.top < windowHeight && rect.bottom > 0) {
+    const start = scrollY + rect.top - windowHeight * 0.3;
+    const end = scrollY + rect.bottom - windowHeight * 0.6;
+    const rawProgress = (scrollY - start) / (end - start);
 
-  overlay.addEventListener("click", () => {
-    overlay.classList.add("opacity-0");
-    panel.classList.add("-translate-x-full");
-    iconClose.classList.add("hidden");
-    iconHamburger.classList.remove("hidden");
-    setTimeout(() => menu.classList.add("hidden"), 300);
-  });
+    // Przyspieszenie + wyrównanie końcówki
+    const progress = Math.min(1, Math.max(0, rawProgress * 1.2));
 
-  // Paralaksa z większą prędkością
-  const parallaxElements = document.querySelectorAll('.parallax');
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent) || /iPad|iPhone|iPod/.test(navigator.userAgent);
-  
-  if(isMobile){
-    window.addEventListener('scroll', () => {
-      const scrollPos = window.pageYOffset;
-      parallaxElements.forEach(el => {
-        el.style.backgroundPosition = `center ${scrollPos * 0.5}px`; // szybciej
-      });
+    const firstItem = items[0].offsetTop + 20;
+    const lastItem = items[items.length - 1].offsetTop + 30; // +30 = trafia w środek ostatniej kropki
+    const maxHeight = lastItem - firstItem;
+
+    const currentHeight = maxHeight * progress;
+    line.style.height = currentHeight + 'px';
+
+    // Fade-in gdy linia prawie dotyka
+    items.forEach(item => {
+      const itemTop = item.offsetTop - firstItem - 40;
+      if (currentHeight >= itemTop) {
+        item.classList.add('visible');
+      } else {
+        item.classList.remove('visible');
+      }
     });
-  } else {
-    parallaxElements.forEach(el => el.style.backgroundAttachment = 'fixed');
   }
+});
+</script>
 
-  // ScrollReveal
-  const reveals = document.querySelectorAll('.reveal');
+
+<style>
+/* Twój istniejący CSS tutaj… (fade-in, parallax, hamburger, etc.) */
+
+/* === PASEK POSTĘPU === */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 6px;
+  background: linear-gradient(to right, #ff000d, #ff8a36);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  z-index: 9999;
+  transition: width 0.1s ease;
+}
+</style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+
+<!-- Pasek przewijania -->
+<div id="scrollProgress"></div>
+
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+  <!-- Twój header -->
+</header>
+
+<main>
+  <!-- Twój content: parallax, sections, galerie, newsletter -->
+</main>
+
+<footer class="bg-background-dark text-gray-400 py-10 mt-16 fade-in">
+  <!-- Twój footer -->
+</footer>
+
+<script>
+// Pasek przewijania
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+});
+
+// Twój istniejący JS: fade-in observer, hamburger menu itd.
+</script>
+
+  <!-- Wstawiona galeria partnerów -->
+  <section class="bg-background-dark py-12 md:py-40" id="youtube">
+    <h2 class="text-gray-800 dark:text-white text-[24px] font-bold px-6 pb-6 fade-in">Obdarzyli mnie zaufaniem</h2>
+
+
+    <div class="logo-carousel fade-in">
+      <div class="logo-track" id="logoTrack" aria-hidden="true">
+        <div class="logo-group">
+            <p></p>
+          <a href="https://wkdzik.pl/" target="_blank"><img src="aaawk.png" alt="Logo 1"></a>
+          <a href="https://pancernik.eu/" target="_blank"><img src="pancerniklogo.webp" alt="Logo 2"></a>
+          <a href="https://www.dorcoglobal.com/" target="_blank"><img src="dorcologo.png" alt="Logo 3" class="invert"></a>
+          <a href="https://marpanel.pl/" target="_blank"><img src="logomaranel.svg" alt="Logo 4" class="invert"></a>
+        </div>
+        <div class="logo-group" aria-hidden="true">
+            <p></p>
+          <a href="https://wkdzik.pl/" target="_blank"><img src="aaawk.png" alt="Logo 1"></a>
+          <a href="https://pancernik.eu/" target="_blank"><img src="pancerniklogo.webp" alt="Logo 2"></a>
+          <a href="https://www.dorcoglobal.com/" target="_blank"><img src="dorcologo.png" alt="Logo 3" class="invert"></a>
+          <a href="https://marpanel.pl/" target="_blank"><img src="logomaranel.svg" alt="Logo 4" class="invert"></a>
+        </div>
+      </div>
+    </div>
+
+<section class="bg-background-dark py-8 md:py-40 fade-in"></section>
+
+<section class="bg-background-light dark:bg-background-dark py-8 px-4" id="contact">
+  <div class="max-w-md mx-auto text-center">
+    <h2 class="text-gray-800 dark:text-white text-3xl font-bold mb-4 fade-in">Zarzuć pomysłem</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-8 fade-in">
+      Podziel się tym, co chciałbyś zobaczyć u mnie na social mediach.
+    </p>
+
+    <form action="#" class="flex flex-col sm:flex-row gap-4 fade-in" method="POST">
+      <div class="flex-grow">
+        <textarea id="idea" name="idea" placeholder="Twój pomysł"
+          rows="1"
+          class="resize-none w-full rounded-md border border-gray-300 dark:border-gray-600 bg-background-light dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-primary focus:border-primary overflow-hidden transition-all duration-200"></textarea>
+      </div>
+
+      <button type="submit"
+        class="sm:w-auto w-full py-3 px-8 rounded-md text-sm font-medium text-white bg-primary hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+        Wyślij
+      </button>
+    </form>
+  </div>
+</section>
+
+<script>
+const textarea = document.getElementById('idea');
+textarea.addEventListener('input', () => {
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
+});
+</script>
+
+<footer class="bg-background-dark text-gray-400 py-10 mt-16 fade-in">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center md:text-left">
+  </div>
+
+  <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+    © <span id="year"></span> Michał Koziar. Wszystkie prawa zastrzeżone | Realizacja: <span style="color: #ea2b33;">Gracjan Śliwiński.</span>
+    <br>
+    <span class="inline-block mt-3">
+      <i class="fa-solid fa-up-right-from-square mr-1" style="color: #ffffff;"></i>
+      <a href="#" class="hover:text-primary transition" style="color: #ffffff;">Polityka prywatności</a>
+    </span>
+  </div>
+</footer>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</main>
+    <style>
+      :root {
+        --duration: 12s;
+        --gap: 3rem;
+        --height: 6rem;
+        --maxw: 80%;
+      }
+      .logo-carousel {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 3rem 0;
+      }
+      .logo-track {
+        display: flex;
+        align-items: center;
+        width: max-content;
+        animation: scroll var(--duration) linear infinite;
+      }
+      .logo-group {
+        display: flex;
+        align-items: center;
+        gap: var(--gap);
+        flex: 0 0 auto;
+      }
+      .logo-track img {
+        height: var(--height);
+        width: auto;
+        flex: 0 0 auto;
+        filter: brightness(0) invert(1);
+        opacity: 0.95;
+        transition: transform .25s ease, opacity .25s ease;
+      }
+      .logo-track img:hover {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .logo-track, .logo-group, .logo-track img { margin: 0; padding: 0; }
+    </style>
+
+    <script>
+      (function(){
+        const track = document.getElementById('logoTrack');
+        if (!track) return;
+        const carousel = track.parentElement;
+        function ensureEnoughContent(){
+          const trackW = track.getBoundingClientRect().width;
+          const containerW = carousel.getBoundingClientRect().width;
+          if (trackW < containerW * 2) {
+            const groups = Array.from(track.querySelectorAll('.logo-group'));
+            groups.forEach(g=>{
+              const clone = g.cloneNode(true);
+              clone.setAttribute('aria-hidden','true');
+              track.appendChild(clone);
+            });
+            setTimeout(ensureEnoughContent, 20);
+          }
+        }
+        ensureEnoughContent();
+        window.addEventListener('resize', function(){
+          clearTimeout(window.__logoResizeTimer);
+          window.__logoResizeTimer = setTimeout(ensureEnoughContent, 120);
+        });
+      })();
+    </script>
+  </section>
+<style>
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
+<script>
+// ENERGICZNY, ALE PŁYNNIEJSZY FADE-IN OBSERVER
+const fadeEls = document.querySelectorAll('.fade-in');
+
+if (fadeEls.length) {
+  const observer = new IntersectionObserver((entries, obs) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const el = e.target;
+      el.style.transitionDelay = el.dataset.delay || '0s';
+      el.classList.add('visible');
+      obs.unobserve(el);
+    }
+  }, { threshold: 0.05 });
+
+  fadeEls.forEach(el => observer.observe(el));
+}
+</script>
+
+<!-- === SCRIPTS === -->
+<script>
+function animateValue(el, start, end, duration) {
+  let startTime = null;
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const value = Math.floor(progress * (end - start) + start);
+    el.textContent = value.toLocaleString("pl-PL") + " +";
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll("[data-counter]");
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        obs.unobserve(entry.target);
+        const el = entry.target;
+        const end = parseInt(el.getAttribute("data-counter"), 10);
+        animateValue(el, 0, end, 2000);
+        obs.unobserve(el); // tylko raz
       }
     });
-  }, { threshold: 0.2 });
-  reveals.forEach(el => observer.observe(el));
+  }, { threshold: 0.4 }); // 0.4 = 40% widoczności
 
-  // Smooth scroll "Czytaj dalej"
-  document.querySelector('a[href="#about-section"]').addEventListener('click', function(e){
-    e.preventDefault();
-    document.querySelector('#about-section').scrollIntoView({behavior:'smooth'});
-  });
+  counters.forEach(el => observer.observe(el));
+});
 </script>
 
+
+<script>
+
+// MENU MOBILE — animacja + hamburger w X
+const toggleBtn = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+let menuOpen = false;
+
+toggleBtn.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  toggleBtn.classList.toggle('active', menuOpen);
+  if (menuOpen) {
+    mobileNav.classList.remove('-translate-y-full', 'opacity-0');
+    mobileNav.classList.add('translate-y-0', 'opacity-100');
+  } else {
+    mobileNav.classList.add('-translate-y-full', 'opacity-0');
+    mobileNav.classList.remove('translate-y-0', 'opacity-100');
+  }
+});
+
+mobileNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileNav.classList.add('-translate-y-full', 'opacity-0');
+    mobileNav.classList.remove('translate-y-0', 'opacity-100');
+    toggleBtn.classList.remove('active');
+    menuOpen = false;
+  });
+});
+</script>
+<script>
+// Paralaksa
+const parallaxElements = document.querySelectorAll('.parallax');
+const isMobile = /Mobi|Android/i.test(navigator.userAgent) || /iPad|iPhone|iPod/.test(navigator.userAgent);
+if (isMobile) {
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.pageYOffset;
+    parallaxElements.forEach(el => {
+      el.style.backgroundPosition = `center ${scrollPos * 0.5}px`;
+    });
+  });
+} else {
+  parallaxElements.forEach(el => el.style.backgroundAttachment = 'fixed');
+}
+</script>
 </body>
 </html>
