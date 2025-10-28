@@ -195,8 +195,8 @@ html { scroll-behavior: smooth; }
     <a href="#stats" class="text-lg hover:text-primary">Our Stats</a>
     <a href="#contact" class="text-lg hover:text-primary">Newsletter</a>
   </nav>
+  <div id="scrollProgress"></div>
 </header>
-<div id="scrollProgress"></div>
 
 <!-- === MAIN === -->
 <main>
@@ -549,16 +549,18 @@ function handleTimelineScroll(scrollY) {
 
 /* === PASEK POSTĘPU === */
 #scrollProgress {
-  position: fixed;
-  top: 64px; /* dopasuj do wysokości navbara */
+  position: absolute;
+  bottom: 0; /* linia idealnie na dole navbara */
   left: 0;
   width: 0%;
   height: 4px;
   background: linear-gradient(to right, #ff000d, #ff8a36);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  z-index: 999;
+  transition: width 0.1s ease;
 }
-
+header {
+  position: sticky; /* już masz */
+  top: 0;
+}
 </style>
 </head>
 
