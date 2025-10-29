@@ -124,6 +124,21 @@ html { scroll-behavior: smooth; }
   transform: rotate(-45deg);
   top: 8px;
 }
+#join-btn {
+  background: linear-gradient(270deg, #ea2a33, #ff7a1a);
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+#join-btn:hover {
+  transform: scale(1.05);
+}
+
 </style>
 </head>
 
