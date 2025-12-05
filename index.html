@@ -1,606 +1,1356 @@
-<!DOCTYPE html>
-<html class="dark" lang="en">
+<!doctype html>
+<html lang="pl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Michał Koziar - !ZETORO!</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>/././</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
-
-<script>
-tailwind.config = {
-  darkMode: "class",
-  theme: {
-    extend: {
-      colors: {
-        "primary": "#ea2a33",
-        "background-light": "#000000",
-        "background-dark": "#000000",
-      },
-      fontFamily: {
-        "display": ["Lexend", "Noto Sans", "sans-serif"]
-      },
-    },
-  },
-}
-</script>
-
-<style>
-s {
-  text-decoration-color: #ea2a33;
-  text-decoration-thickness: 0.2rem;
-}
-
-.parallax {
-  position: relative;
-  width: 100vw;
-  margin-left: calc(-1 * (100vw - 100%) / 2);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.parallax::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 1;
-}
-.parallax > * { position: relative; z-index: 2; }
-@media (min-width: 768px) {
-  .parallax { background-position: center 10%; }
-}
-body { min-height: max(884px, 100dvh); }
-main > section { margin-top: 6rem; margin-bottom: 6rem; }
-html { scroll-behavior: smooth; }
-
-/* === ANIMACJE === */
-.fade-in {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-[data-delay] { transition-delay: var(--delay, 0s); }
-
-/* Efekt pisania */
-.typewriter {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid #ea2a33;
-  animation: typing 2s steps(25, end), blink 0.7s step-end infinite;
-}
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
-/* Fade-in dla startu strony */
-@keyframes appear {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.start-fade {
-  opacity: 0;
-  animation: appear 0.8s ease-out forwards;
-}
-
-/* Hamburger animacja */
-.hamburger {
-  position: relative;
-  width: 28px;
-  height: 20px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.hamburger span {
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-.hamburger span:nth-child(1) { top: 0; }
-.hamburger span:nth-child(2) { top: 8px; }
-.hamburger span:nth-child(3) { top: 16px; }
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg);
-  top: 8px;
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg);
-  top: 8px;
-}
-#join-btn {
-  background: linear-gradient(270deg, #ea2a33, #9d1b21);
-  background-size: 200% 200%;
-  animation: gradientShift 5s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-#join-btn:hover {
-  transform: scale(1.05);
-}
-
-</style>
-</head>
-
-<body class="bg-background-light dark:bg-background-dark font-display">
-<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
-  <div class="container mx-auto px-4">
-    <div class="flex items-center justify-between h-16">
-
-      <!-- Ikony społecznościowe -->
-      <div class="flex space-x-6 text-white">
-        <a href="https://www.instagram.com/michal.koziar/" target="_blank" aria-label="Instagram" class="social-icon">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.tiktok.com/@michalzetoro" target="_blank" aria-label="TikTok" class="social-icon">
-          <i class="fab fa-tiktok"></i>
-        </a>
-        <a href="https://www.facebook.com/michalkoziar/?locale=pl_PL" target="_blank" aria-label="Facebook" class="social-icon">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </div>
-
-      <style>
-      .social-icon i {
-        font-size: 20px;
-        display: inline-block;
-        transition: transform 0.3s ease, opacity 0.6s ease;
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      .social-icon i.fade-in {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .social-icon:hover i {
-        transform: scale(1.2) rotate(15deg);
-      }
-      </style>
-
-      <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.social-icon i').forEach((el, index) => {
-          setTimeout(() => el.classList.add('fade-in'), index * 100);
-        });
-      });
-      </script>
-
-      <!-- MENU GŁÓWNE (desktop) -->
-      <nav class="hidden md:flex space-x-6 text-white">
-        <a href="#home" class="relative group">Home<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
-        <a href="#services" class="relative group">O mnie<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
-        <a href="#gallery" class="relative group">Styl pracy<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
-        <a href="#about" class="relative group">Moja droga<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
-        <a href="#about-me" class="relative group">Kim jestem<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
-        <a href="#youtube" class="relative group">Współpraca<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
-        <a href="#contact" class="relative group">Pomysły<span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span></a>
-
-      </nav>
-
-      <!-- MENU MOBILNE -->
-      <div id="menuToggle" class="hamburger md:hidden z-50">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- NAWIGACJA MOBILNA -->
-  <nav id="mobileNav"
-    class="fixed top-0 left-0 w-full bg-background-dark/95 backdrop-blur-md text-white flex flex-col items-center justify-center space-y-6 transform -translate-y-full opacity-0 transition-all duration-500 ease-in-out md:hidden h-screen z-40">
-    <a href="#home" class="text-lg hover:text-primary">Home</a>
-    <a href="#services" class="text-lg hover:text-primary">O mnie</a>
-    <a href="#gallery" class="text-lg hover:text-primary">Styl pracy</a>
-    <a href="#about" class="text-lg hover:text-primary">Moja droga</a>
-    <a href="#about-me" class="text-lg hover:text-primary">Kim jestem</a>
-    <a href="#youtube" class="text-lg hover:text-primary">Współpraca</a>
-    <a href="#contact" class="text-lg hover:text-primary">Pomysły</a>
-  </nav>
-  <div id="scrollProgress"></div>
-</header>
-
-<!-- === MAIN === -->
-<main>
-  <div id="home" class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
-    <div class="parallax flex flex-col items-center justify-center gap-6 p-6 text-white w-full min-h-screen" style='background-image: url("awwag2.jpg");'>
-      <div class="flex flex-col gap-4 text-center">
-        <h1 class="text-white text-4xl font-black @[480px]:text-5xl fade-in">Michał Koziar</h1>
-        <h2 class="text-white text-base fade-in"><s>Wymówki</s> Nie ma takiej mozliwości, po prostu z dnia na dzień Tworzę...</h2>
-      </div>
-      <button id="join-btn" class="flex fade-in items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-base font-bold hover:opacity-90 transition">
-        <span class="truncate">Dołącz do społeczności</span>
-      </button>
-    </div>
-  </div>
-</main>
-
-<!-- === POPUP (pewny fallback + optional blur) === -->
-<div id="popup"
-     class="fixed inset-0 hidden items-center justify-center z-50 transition-opacity duration-300 opacity-0"
-     style="background-color: rgba(0,0,0,0.6); /* fallback gdy bg-black/60 nie działa */
-            -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); /* opcjonalny blur */">
-<div id="popup-box" class="bg-black text-white rounded-2xl p-6 w-80 flex flex-col items-center gap-4 border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-       style="animation: popupIn 300ms ease forwards;">
-    <h3 class="text-xl font-bold text-center">Dołącz do społeczności</h3>
-    <div class="flex flex-col gap-3 w-full">
-  <a href="https://www.instagram.com/michal.koziar/" target="_blank"
-     class="w-full text-center bg-pink-700 text-white py-2 rounded-lg hover:bg-pink-600 transition">
-     Instagram
-  </a>
-
-  <a href="https://www.tiktok.com/@michalzetoro" target="_blank"
-     class="w-full text-center bg-[#3a006e] text-white py-2 rounded-lg hover:bg-[#52009e] transition">
-     TikTok
-  </a>
-
-  <a href="https://www.youtube.com/channel/UCcxfnQqSkaQWV03TykKhcTg" target="_blank"
-     class="w-full text-center bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">
-     YouTube
-  </a>
-</div>
-
-<button id="close-popup"
-        class="mt-4 text-sm text-gray-400 hover:text-white transition">
-  Zamknij
-</button>
-  </div>
-</div>
-
-<style>
-  @keyframes popupIn {
-    from { opacity: 0; transform: translateY(8px) scale(0.98); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  @keyframes popupOut {
-    from { opacity: 1; transform: translateY(0) scale(1); }
-    to   { opacity: 0; transform: translateY(8px) scale(0.98); }
-  }
-</style>
-
-<script>
-  const btn = document.getElementById('join-btn');
-  const popup = document.getElementById('popup');
-  const popupBox = document.getElementById('popup-box');
-  const closeBtn = document.getElementById('close-popup');
-
-  function showPopup() {
-    // pokaż kontener (hidden -> flex) i triggeruj przejście opacity
-    popup.classList.remove('hidden');
-    popup.classList.add('flex');
-
-    // wymuś reflow żeby transition zadziałało poprawnie
-    // (czyli przeglądarka "widzi" zmianę opakowania)
-    void popup.offsetHeight;
-
-    popup.classList.remove('opacity-0');
-    popup.classList.add('opacity-100');
-
-    // upewnij się, że box ma wejściową animację
-    popupBox.style.animation = 'popupIn 300ms ease forwards';
-  }
-
-  function hidePopup() {
-    // animacja out dla boxa
-    popupBox.style.animation = 'popupOut 220ms ease forwards';
-
-    // ukryj zasłonę (przez opacity), ale poczekamy na koniec transition aby usunąć flex/hidden
-    popup.classList.remove('opacity-100');
-    popup.classList.add('opacity-0');
-
-    // czekaj na koniec transition opacity (bez setTimeout)
-    function onTransitionEnd(e) {
-      if (e.propertyName === 'opacity') {
-        popup.removeEventListener('transitionend', onTransitionEnd);
-        popup.classList.remove('flex');
-        popup.classList.add('hidden');
-        // przywróć domyślną animację boxa na przyszłość
-        popupBox.style.animation = '';
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet"><script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: "#007e94",
+          accent: "#1d3557",
+          "background-light": "#f1faee",
+          "text-dark": "#1a1a1a"
+        },
+        borderRadius: { DEFAULT: "0.5rem", lg: "0.75rem", xl: "1rem" }
       }
     }
-    popup.addEventListener('transitionend', onTransitionEnd);
   }
-
-  btn.addEventListener('click', showPopup);
-  closeBtn.addEventListener('click', hidePopup);
-
-  // dodatkowo: kliknięcie poza boxem zamyka popup
-  popup.addEventListener('click', (e) => {
-    if (e.target === popup) hidePopup();
-  });
-
-  // ESC zamyka
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !popup.classList.contains('hidden')) hidePopup();
-  });
 </script>
-
-
-
-<section id="services" class="mt-20">
-  <h2 class="text-gray-800 dark:text-white text-[24px] font-bold px-6 pb-6 fade-in">Krótko O Mnie</h2>
-  <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 p-6">
-    <div class="fade-in flex flex-col gap-4 rounded-lg border border-gray-200 dark:border-[#151515] bg-background-dark dark:bg-[#151515] p-6">
-      <div class="text-primary"><span class="material-symbols-outlined">fitness_center</span></div>
-      <h3 class="text-gray-900 dark:text-white text-base font-bold">Trening</h3>
-      <p class="text-gray-600 dark:text-[#b89d9f] text-sm">W moim zyciu trening to podstawa, więc aktywnie trenuje od X lat, budując przy tym kozacką formę zycia.</p>
-    </div>
-    <div class="fade-in flex flex-col gap-4 rounded-lg border border-gray-200 dark:border-[#151515] bg-background-dark dark:bg-[#151515] p-6">
-      <div class="text-primary"><span class="material-symbols-outlined">groups</span></div>
-      <h3 class="text-gray-900 dark:text-white text-base font-bold">Człowiek renesansu</h3>
-      <p class="text-gray-600 dark:text-[#b89d9f] text-sm">Sawiam na produkywne spędzanie czasu, więc tylko jak mam chwilę czasu wolnego tworzę ale tez nowe narzedzia ktre pomagaja mi utrzymac dyscypline oraz forme</p>
-    </div>
-    <div class="fade-in flex flex-col gap-4 rounded-lg border border-gray-200 dark:border-[#151515] bg-background-dark dark:bg-[#151515] p-6">
-      <div class="text-primary"><span class="material-symbols-outlined">self_improvement</span></div>
-      <h3 class="text-gray-900 dark:text-white text-base font-bold">Społeczność na IG</h3>
-      <p class="text-gray-600 dark:text-[#b89d9f] text-sm"></p>
-      <span class="text-3xl dark:text-[#b89d9f]" data-counter="74000">0</span>
-    </div>
-    <div class="fade-in flex flex-col gap-4 rounded-lg border border-gray-200 dark:border-[#151515] bg-background-dark dark:bg-[#151515] p-6">
-      <div class="text-primary"><span class="material-symbols-outlined">self_improvement</span></div>
-      <h3 class="text-gray-900 dark:text-white text-base font-bold">Społeczność na TikTok</h3>
-      <p class="text-gray-600 dark:text-[#b89d9f] text-sm"></p>
-      <span class="text-3xl dark:text-[#b89d9f]" data-counter="156000">0</span>
-    </div>
-  </div>
-</section>
-
-
-  <!-- === GALERIA === -->
-  <section id="gallery" class="mt-20">
-    <h2 class="fade-in text-gray-800 dark:text-white text-[24px] font-bold px-6 pb-6">Moje Sposoby</h2>
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-12 p-6">
-      <div class="fade-in bg-cover bg-center flex flex-col justify-end p-6 aspect-square rounded-lg" data-delay="0s" style='background-image: linear-gradient(0deg, rgba(0,0,0,.6), rgba(0,0,0,0)), url("zetttoro.jpeg");'><p class="text-white text-lg font-bold w-4/5">Wszystko stworzonę na miarę moich wymagań</p></div>
-      <div class="fade-in bg-cover bg-center flex flex-col justify-end p-6 aspect-square rounded-lg" data-delay="0.2s" style='background-image: linear-gradient(0deg, rgba(0,0,0,.6), rgba(0,0,0,0)), url("zettoro.jpg");'><p class="text-white text-lg font-bold w-4/5">Trening to podstawa bracie!</p></div>
-    </div>
-  </section>
-
-  <section class="bg-background-dark py-16 md:py-24" id="about" class="mt-20">
-<h2 class="fade-in text-gray-800 dark:text-white text-[24px] font-bold px-6 pb-6">Moja droga</h2>
-  <div class="container mx-auto flex flex-col items-center gap-10 px-4 md:px-6">
-    <div class="max-w-3xl text-center fade-in">
-
-      <div class="timeline-container text-left mt-12 relative">
-        
-        <!-- Pasek -->
-        <div class="timeline-line" id="timelineLine"></div>
-
-        <!-- Punkty osi czasu -->
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h4 class="font-bold text-lg">2008 - Początek przygody</h4>
-            <p class="dark:text-[#b89d9f]" >Zaczynałem w garażu z jednym hantlem i ogromną motywacją. Pierwsze pompki, pierwsze porażki, ale wiedziałem, że chcę więcej niż przeciętność.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h4 class="font-bold text-lg">2011 - Pierwsze sukcesy</h4>
-            <p class="dark:text-[#b89d9f]" >Zdobyłem swoje pierwsze medale w lokalnych zawodach fitness. To wtedy poczułem, że trening to nie tylko hobby, to styl życia i sposób na wygrywanie z samym sobą.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h4 class="font-bold text-lg">2014 - Powstanie Zetoro</h4>
-            <p class="dark:text-[#b89d9f]" >Otworzyłem siłownię w starej stodole. To był ryzykowny start, ale czułem, że to moja misja i nikt tego nie zrobi za mnie.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h4 class="font-bold text-lg">2017 - Rozwój społeczności</h4>
-            <p class="dark:text-[#b89d9f]" >Kanały YouTube i TikTok zaczęły rosnąć, a społeczność szybko się powiększała. Ludzie oglądali mój content, codzienne życie i to dawało mi niesamowitą energię do dalszego działania.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h4 class="font-bold text-lg">2020 - Współpraca z markami</h4>
-            <p class="dark:text-[#b89d9f]" >Rozpocząłem pierwsze poważne współprace ze znanymi markami fitness m.in. <a href="https://wkdzik.pl/" target="_blank" style="color: yellow;">WkDzik</a>. Wreszcie pasja zaczęła przynosić realne efekty i możliwość rozwoju biznesowego.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h4 class="font-bold text-lg">2023 - Ekspansja online</h4>
-            <p class="dark:text-[#b89d9f]" >Moje social media eksplodowały, setki tysięcy obserwujących, miliony obejrzeń. ZETORO przestało być lokalne i stało się miejscem znanym w całej Polsce.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h4 class="font-bold text-lg">2025 - Plany na przyszłość</h4>
-            <p class="dark:text-[#b89d9f]" >Planuję rozszerzenie ZETORO, stworzenie własnej linii sprzętu i suplementów. Cel jest prosty: inspirować, pokazywać, że dyscyplina i codzienny wysiłek naprawdę się opłacają.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section id="about-me" class="bg-background-dark py-20 px-6">
-  <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
-    <!-- Zdjęcie -->
-    <div class="md:w-1/2 flex justify-center">
-    <img src="zetoropdcst.jpeg" alt="Michał Koziar"
-      class="fade-in rounded-2xl shadow-[0_0_40px_rgba(234,42,51,0.25)] w-5/6 sm:w-2/3 md:w-[90%] lg:w-[100%] max-w-md object-cover transition-all duration-300">
-    </div>
-
-    <!-- Tekst -->
-    <div class="md:w-1/2 text-center md:text-left fade-in">
-      <h2 class="text-white text-3xl font-bold mb-4">Kim jestem?</h2>
-      <p class="text-gray-400 text-base leading-relaxed mb-4">
-        Nazywam się <span class="text-primary font-semibold">Michał Koziar</span> — pasjonat treningu, dyscypliny i codziennego rozwoju. 
-        Nie interesują mnie półśrodki ani wymówki. Każdy dzień to okazja, by być lepszym niż wczoraj. 
-      </p>
-      <p class="text-gray-400 text-base leading-relaxed mb-4">
-        Zaczynałem od prostych treningów w garażu, dziś tworzę przestrzeń, która inspiruje innych do działania. 
-        Pokazuję, że można osiągnąć wszystko, jeśli przestaniesz gadać, a zaczniesz działać.
-      </p>
-      <p class="text-gray-400 text-base leading-relaxed">
-        Zetoro to nie tylko siłownia — to inspirujący styl życia. Jeśli tu jesteś, to znaczy, że też czujesz, że <s>NIE DA SIĘ</s> nie istnieje.
-      </p>
-    </div>
-  </div>
-</section>
-
-
 <style>
-.timeline-container {
-  position: relative;
-  max-width: 50rem; /* 800px */
-  margin: 0 auto;
+  /* Płynna animacja */
+a, button {
+  transition: color .3s ease, background-color .3s ease;
+}
+/* ===========================
+    MENU DESKTOP (tylko tekst)
+=========================== */
+header nav ul li a:hover {
+  color: #53f0d8 !important;
 }
 
-.timeline-item {
-  position: relative;
-  padding-left: 3.125rem; /* 50px */
-  margin-bottom: 3.75rem; /* 60px */
-  opacity: 0;
-  transform: translateY(1.875rem); /* 30px */
-  transition: opacity 0.6s ease, transform 0.6s ease;
+/* ===========================
+    MENU MOBILE (tylko tekst)
+=========================== */
+#mobilePanel a:hover {
+  color: #53f0d8 !important;
 }
 
-.timeline-item.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ===========================
+    JOIN BUTTON (tylko background)
+=========================== */
+#join-btn:hover {
+  background-color: #53f0d8 !important;
+  color: rgb(0, 0, 0) !important;
+  transition: 0.5s ease-in-out;
 }
 
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -0.125rem; /* -2px */
-  top: 0; /* wcześniej 8px */
-  width: 1.25rem; /* 20px */
-  height: 1.25rem; /* 20px */
-  border-radius: 50%;
-  background-color: #ea2a34;
-  z-index: 2;
-  box-shadow: 0 0 0.625rem #ffffff, 0 0 1.25rem rgba(255,94,0,0.5); /* 10px, 20px */
+/* ===========================
+    Scroll-to-top (tylko color)
+=========================== */
+#scrollTopBtn:hover i {
+  color: #007e94 !important;
 }
 
-.timeline-line {
-  position: absolute;
-  left: 0.5rem; /* 8px */
-  top: 0.625rem; /* 10px */
-  width: 0.1875rem; /* 3px */
-  height: 0;
-  background: linear-gradient(to bottom, #ea2a33 0%, #ea2a33 50%, #ea2a33 100%);
-  box-shadow: 0 0 0.75rem rgba(53, 25, 96, 0.7); /* 12px */
-  z-index: 1;
-  border-radius: 0.125rem; /* 2px */
-  transition: height 0.15s linear;
+  body {
+  font-family: 'Quicksand', sans-serif;
+  font-optical-sizing: auto; /* dla variable font */
+  font-weight: 400; /* domyślna waga */
 }
 
-.timeline-content {
-  background: rgba(30, 30, 30, 0.7);
-  padding: 1.25rem; /* 20px */
-  border-radius: 0.5rem; /* 8px */
-  border-left: 0.1875rem solid #ea2a33; /* 3px */
-  color: white;
-}
-</style>
-
-
-<script>
-let lastScrollY = 0;
-let ticking = false;
-
-window.addEventListener('scroll', () => {
-  lastScrollY = window.scrollY;
-  if (!ticking) {
-    window.requestAnimationFrame(() => {
-      handleTimelineScroll(lastScrollY);
-      ticking = false;
-    });
-    ticking = true;
-  }
-});
-
-function handleTimelineScroll(scrollY) {
-  const section = document.querySelector('#about');
-  const line = document.querySelector('#timelineLine');
-  const items = section.querySelectorAll('.timeline-item');
-  const rect = section.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-
-  if (rect.top < windowHeight && rect.bottom > 0) {
-    const start = scrollY + rect.top - windowHeight * 0.3;
-    const end = scrollY + rect.bottom - windowHeight * 0.6;
-    const rawProgress = (scrollY - start) / (end - start);
-    const progress = Math.min(1, Math.max(0, rawProgress * 1.2));
-
-    const firstItem = items[0].offsetTop + 20;
-    const lastItem = items[items.length - 1].offsetTop + 30;
-    const maxHeight = lastItem - firstItem;
-
-    line.style.height = maxHeight * progress + 'px';
-
-    items.forEach(item => {
-      const itemTop = item.offsetTop - firstItem - 40;
-      item.classList.toggle('visible', maxHeight * progress >= itemTop);
-    });
-  }
-}
-</script>
-
-
-
-<style>
-/* Twój istniejący CSS tutaj… (fade-in, parallax, hamburger, etc.) */
-
-/* === PASEK POSTĘPU === */
-#scrollProgress {
+  #scrollProgress {
   position: absolute;
   bottom: 0; /* linia idealnie na dole navbara */
   left: 0;
   width: 0%;
-  height: 4px;
-  background: linear-gradient(to right, #ff000d, #ff8a36);
+  height: 2px;
+  background: #ffffff;
   transition: width 0.1s ease;
 }
 header {
   position: sticky; /* już masz */
   top: 0;
 }
+html { scroll-behavior: smooth; }
+body { min-height: 100dvh; -webkit-font-smoothing: antialiased; }
+
+#home .parallax { background-image: url('okbg.JPG'); }
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  #home .parallax {
+    background-size: contain; /* lub cover + adjust position */
+    background-position: center top; /* lepiej widoczne ważne elementy */
+  }
+}
+
+
+.hamburger-line { transition: transform .35s ease, opacity .2s ease; transform-origin: center; }
+.menu-open .line-1 { transform: translateY(6px) rotate(45deg); }
+.menu-open .line-2 { opacity: 0; transform: scaleX(.2); }
+.menu-open .line-3 { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-panel { transition: transform .35s cubic-bezier(.2,.9,.3,1), opacity .25s ease; transform-origin: top; }
+
+header#navbar {
+  background: rgba(0, 0, 0, 0.953);
+  height: 64px;
+}
+
+.nav-scrolled {
+  background: rgba(0, 0, 0, 0.953);
+  box-shadow: none; /* usuwa cień */
+}
+
+@media (min-width:768px) {
+  .nav-scrolled {
+    backdrop-filter: blur(6px); /* efekt blur */
+    background: rgba(0, 0, 0, 0.953);
+    box-shadow: none; /* upewniamy się, że cień nie wróci */
+  }
+}
+
+
+.parallax { background-position: center center; background-repeat: no-repeat; background-size: cover; transform: translateZ(0); will-change: background-position; }
+
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.8s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes popupIn { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes popupOut { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(8px) scale(0.98); } }
+
+/* Karty */
+.perspective { perspective: 1200px; }
+.flip-card { transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4,0,0.2,1); cursor: pointer; }
+.flip-card-front, .flip-card-back { backface-visibility: hidden; position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+.flip-card-back { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back { box-shadow: 0 20px 40px rgba(0,0,0,0.5); border-radius: 1rem; }
+.flip-card:hover { transform: rotateY(180deg); }
+
+/* Animacja pierwszego wejścia */
+.flip-card.animate-once { transform: rotateY(20deg); transition: transform 0.4s ease-out; }
+.flip-card.animate-once.finish { transform: rotateY(0deg); }
+
+
+
+/* Hamburger button */
+#menuBtn svg {
+  height: 3em;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+  fill: none;
+  stroke: white;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  transition: stroke-dasharray 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+/* Tylko po kliknięciu przycisku */
+#menuBtn.active svg {
+  transform: rotate(-45deg);
+}
+
+#menuBtn.active svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}
+
 </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-display">
+<body class="bg-black font-display text-white">
 
-<!-- Pasek przewijania -->
-<div id="scrollProgress"></div>
+<header id="navbar" class="fixed inset-x-0 top-0 z-40">
+  <nav class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex gap-3">
+        <div class="flex items-center">
+          <a href="#home" class="hover:opacity-50 transition flex items-center">
+            <img src="BialeLogo.png" alt="Logo firmy" class="h-14 w-auto object-contain">
+          </a>
+        </div>
+      </div>
 
-<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
-  <!-- Twój header -->
+      <!-- PEŁNE MENU (tylko PC >= 1024px) -->
+      <ul class="hidden lg:flex items-center gap-4 text-sm font-bold text-white">
+        <li><a href="#home" class="px-3 py-2 hover:text-primary">HOME</a></li>
+        <li><a href="#about" class="px-3 py-2 hover:text-primary">O MNIE</a></li>
+        <li><a href="#services" class="px-3 py-2 hover:text-primary">PLAN DZIAŁANIA</a></li>
+        <li><a href="#why" class="px-3 py-2 hover:text-primary">WSPÓŁPRACA</a></li>
+        <li><a href="#testimonials" class="px-3 py-2 hover:text-primary">KONTAKT</a></li>
+        <li><a href="#contact" class="px-3 py-2 hover:text-primary">PORTFOLIO</a></li>
+      </ul>
+
+      <!-- HAMBURGER (widoczny telefon + tablet < 1024px) -->
+      <div class="flex lg:hidden items-center">
+        <button id="menuBtn" aria-label="Otwórz menu" class="w-10 h-10 flex items-center justify-center rounded-lg bg-black shadow-sm text-white">
+          <svg class="w-8 h-8" viewBox="0 0 32 32">
+            <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+            <path class="line" d="M7 16 27 16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PANEL MOBILNY -->
+  <div id="mobilePanel" class="mobile-panel origin-top transform translate-y-0 opacity-0 pointer-events-none lg:hidden">
+    <div class="px-4 pt-2 pb-6 bg-black/95">
+      <div class="flex flex-col gap-3 mt-2 text-white">
+        <a href="#home" class="px-4 py-3 rounded-lg hover:bg-primary/5">Start</a>
+        <a href="#about" class="px-4 py-3 rounded-lg hover:bg-primary/5">O nas</a>
+        <a href="#services" class="px-4 py-3 rounded-lg hover:bg-primary/5">Usługi</a>
+        <a href="#why" class="px-4 py-3 rounded-lg hover:bg-primary/5">Dlaczego my</a>
+        <a href="#testimonials" class="px-4 py-3 rounded-lg hover:bg-primary/5">Opinie</a>
+        <a href="#contact" class="px-4 py-3 rounded-lg hover:bg-primary/5">Kontakt</a>
+      </div>
+      <div class="mt-4 px-4">
+        <button id="join-btn" class="bg-[#007e94] flex fade-in items-center justify-center rounded-lg h-10 px-4 text-white text-sm font-bold hover:opacity-90 transition">
+          <span class="truncate">Dołącz do społeczności</span>
+        </button>      
+      </div>
+    </div>
+  </div>
+
+  <div id="scrollProgress"></div>
 </header>
 
-<main>
-  <!-- Twój content: parallax, sections, galerie, newsletter -->
+<!-- Scroll to top button -->
+<a href="#home" id="scrollTopBtn"
+   class="fixed bottom-4 right-4 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center opacity-0 pointer-events-none z-[9999] transition-opacity duration-700">
+  <i class="fas fa-arrow-up text-black text-lg md:text-xl"></i>
+</a>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+const mobilePanel = document.getElementById('mobilePanel');
+
+menuBtn.addEventListener('click', () => {
+  menuBtn.classList.toggle('active');
+  mobilePanel.classList.toggle('opacity-0');
+  mobilePanel.classList.toggle('pointer-events-none');
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollBtn = document.getElementById('scrollTopBtn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 150) {
+      scrollBtn.classList.remove('opacity-0', 'pointer-events-none');
+      scrollBtn.classList.add('opacity-100');
+    } else {
+      scrollBtn.classList.add('opacity-0', 'pointer-events-none');
+      scrollBtn.classList.remove('opacity-100');
+    }
+  });
+});
+</script>
+<!-- Pamiętaj podłączyć FontAwesome jeśli jeszcze nie masz -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<main class="pt-16">
+<section id="home">
+<div id="hero" class="relative overflow-hidden parallax min-h-screen md:min-h-[110vh] lg:min-h-[100vh]">
+  <div id="heroOverlay" class="absolute inset-0 bg-black/35 transition-all duration-300"></div>
+  <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-end pb-40">
+    <div class="max-w-2xl text-white fade-in">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-family">Strony internetowe</h1>
+      <p class="mt-2 text-lg sm:text-xl text-white/90">Tu powstają strony internetowe przyciągające wzrok Twoich klientów</p>
+      <div class="mt-4 flex gap-3 flex-wrap">
+        <button id="join-btn" class="flex fade-in items-center justify-center rounded-lg h-10 px-4 bg-white text-black text-sm font-bold hover:opacity-90 transition">
+          <span class="truncate">Wybierz formę kontaktu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
+<div class="books-wrapper">
+  <div class="book">
+    <p>Hello</p>
+    <div class="cover"><p>Hover Me</p></div>
+  </div>
+
+  <div class="book">
+    <p>Hello</p>
+    <div class="cover"><p>Hover Me</p></div>
+  </div>
+
+  <div class="book">
+    <p>Hello</p>
+    <div class="cover"><p>Hover Me</p></div>
+  </div>
+</div>
+
+<style>
+/* Wrapper */
+.books-wrapper {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+/* Book – gradient obejmujący cały element */
+.book {
+  position: relative;
+  border-radius: 0.6rem;
+  width: 16.25rem;
+  height: 22.5rem;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,    /* fiolet */
+    #000000 20%,   /* turkus */
+    #ffffff 100%   /* ciemny fiolet/czerń */
+  );
+  box-shadow: 0.1rem 0.1rem 1rem #000;
+  transform: preserve-3d;
+  perspective: 200rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* Cover – gradient pokrywający cały element */
+.cover {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,    /* fiolet */
+    #53f0d8 5%,   /* turkus */
+    #000000 90%  /* ciemny fiolet/czerń */
+  );
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.5s;
+  transform-origin: 0;
+  box-shadow: 0.1rem 0.1rem 1rem #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book:hover .cover {
+  transform: rotateY(-80deg);
+}
+
+.cover.open {
+  transform: rotateY(-80deg);
+}
+
+p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .books-wrapper {
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>
+
+<script>
+document.querySelectorAll(".cover").forEach(c => {
+  c.addEventListener("click", () => {
+    c.classList.toggle("open");
+  });
+});
+</script> -->
+
+
+
+</section>
+<section id="about" class="py-24 bg-black text-white">
+
+  <div class="cards">
+
+    <!-- ******* KARTA 1 ******* -->
+    <div class="card">
+      <div class="content">
+        <div class="back">
+          <div class="back-content">
+            <svg stroke="#ffffff" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="50px" width="50px" fill="#ffffff">
+              <path d="M20.84375 0.03125C20.191406 0.0703125 19.652344 0.425781 19.21875 1.53125C18.988281 2.117188 18.5 3.558594 18.03125 4.9375C17.792969 5.636719 17.570313 6.273438 17.40625 6.75C17.390625 6.796875 17.414063 6.855469 17.40625 6.90625C17.398438 6.925781 17.351563 6.949219 17.34375 6.96875L17.25 7.25C18.566406 7.65625 19.539063 8.058594 19.625 8.09375C22.597656 9.21875 28.351563 11.847656 33.28125 16.78125C38.5 22 41.183594 28.265625 42.09375 30.71875C42.113281 30.761719 42.375 31.535156 42.75 32.84375C42.757813 32.839844 42.777344 32.847656 42.78125 32.84375C43.34375 32.664063 44.953125 32.09375 46.3125 31.625C47.109375 31.351563 47.808594 31.117188 48.15625 31C49.003906 30.714844 49.542969 30.292969 49.8125 29.6875C50.074219 29.109375 50.066406 28.429688 49.75 27.6875C49.605469 27.347656 49.441406 26.917969 49.25 26.4375C47.878906 23.007813 45.007813 15.882813 39.59375 10.46875C33.613281 4.484375 25.792969 1.210938 22.125 0.21875C21.648438 0.0898438 21.234375 0.0078125 20.84375 0.03125 Z M 16.46875 9.09375L0.0625 48.625C-0.09375 48.996094 -0.00390625 49.433594 0.28125 49.71875C0.472656 49.910156 0.738281 50 1 50C1.128906 50 1.253906 49.988281 1.375 49.9375L40.90625 33.59375C40.523438 32.242188 40.222656 31.449219 40.21875 31.4375C39.351563 29.089844 36.816406 23.128906 31.875 18.1875C27.035156 13.34375 21.167969 10.804688 18.875 9.9375C18.84375 9.925781 17.8125 9.5 16.46875 9.09375 Z M 17 16C19.761719 16 22 18.238281 22 21C22 23.761719 19.761719 26 17 26C15.140625 26 13.550781 24.972656 12.6875 23.46875L15.6875 16.1875C16.101563 16.074219 16.550781 16 17 16 Z M 31 22C32.65625 22 34 23.34375 34 25C34 25.917969 33.585938 26.730469 32.9375 27.28125L32.90625 27.28125C33.570313 27.996094 34 28.949219 34 30C34 32.210938 32.210938 34 30 34C27.789063 34 26 32.210938 26 30C26 28.359375 26.996094 26.960938 28.40625 26.34375L28.3125 26.3125C28.117188 25.917969 28 25.472656 28 25C28 23.34375 29.34375 22 31 22 Z M 21 32C23.210938 32 25 33.789063 25 36C25 36.855469 24.710938 37.660156 24.25 38.3125L20.3125 39.9375C18.429688 39.609375 17 37.976563 17 36C17 33.789063 18.789063 32 21 32 Z M 9 34C10.65625 34 12 35.34375 12 37C12 38.65625 10.65625 40 9 40C7.902344 40 6.960938 39.414063 6.4375 38.53125L8.25 34.09375C8.488281 34.03125 8.742188 34 9 34Z"></path>
+            </svg>
+            <strong>Hover Me</strong>
+          </div>
+        </div>
+
+        <div class="front">
+          <div class="img">
+            <div class="circle"></div>
+            <div class="circle" id="right"></div>
+            <div class="circle" id="bottom"></div>
+          </div>
+
+          <div class="front-content">
+            <small class="badge">Pasta</small>
+            <div class="description">
+              <div class="title">
+                <p class="title"><strong>Spaguetti Bolognese</strong></p>
+                <svg height="15px" width="15px" viewBox="0,0,256,256" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></svg>
+              </div>
+              <p class="card-footer">30 Mins &nbsp; | &nbsp; 1 Serving</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+ <div class="cards">
+
+    <!-- ******* KARTA 1 ******* -->
+    <div class="card">
+      <div class="content">
+        <div class="back">
+          <div class="back-content">
+            <svg stroke="#ffffff" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="50px" width="50px" fill="#ffffff">
+              <path d="M20.84375 0.03125C20.191406 0.0703125 19.652344 0.425781 19.21875 1.53125C18.988281 2.117188 18.5 3.558594 18.03125 4.9375C17.792969 5.636719 17.570313 6.273438 17.40625 6.75C17.390625 6.796875 17.414063 6.855469 17.40625 6.90625C17.398438 6.925781 17.351563 6.949219 17.34375 6.96875L17.25 7.25C18.566406 7.65625 19.539063 8.058594 19.625 8.09375C22.597656 9.21875 28.351563 11.847656 33.28125 16.78125C38.5 22 41.183594 28.265625 42.09375 30.71875C42.113281 30.761719 42.375 31.535156 42.75 32.84375C42.757813 32.839844 42.777344 32.847656 42.78125 32.84375C43.34375 32.664063 44.953125 32.09375 46.3125 31.625C47.109375 31.351563 47.808594 31.117188 48.15625 31C49.003906 30.714844 49.542969 30.292969 49.8125 29.6875C50.074219 29.109375 50.066406 28.429688 49.75 27.6875C49.605469 27.347656 49.441406 26.917969 49.25 26.4375C47.878906 23.007813 45.007813 15.882813 39.59375 10.46875C33.613281 4.484375 25.792969 1.210938 22.125 0.21875C21.648438 0.0898438 21.234375 0.0078125 20.84375 0.03125 Z M 16.46875 9.09375L0.0625 48.625C-0.09375 48.996094 -0.00390625 49.433594 0.28125 49.71875C0.472656 49.910156 0.738281 50 1 50C1.128906 50 1.253906 49.988281 1.375 49.9375L40.90625 33.59375C40.523438 32.242188 40.222656 31.449219 40.21875 31.4375C39.351563 29.089844 36.816406 23.128906 31.875 18.1875C27.035156 13.34375 21.167969 10.804688 18.875 9.9375C18.84375 9.925781 17.8125 9.5 16.46875 9.09375 Z M 17 16C19.761719 16 22 18.238281 22 21C22 23.761719 19.761719 26 17 26C15.140625 26 13.550781 24.972656 12.6875 23.46875L15.6875 16.1875C16.101563 16.074219 16.550781 16 17 16 Z M 31 22C32.65625 22 34 23.34375 34 25C34 25.917969 33.585938 26.730469 32.9375 27.28125L32.90625 27.28125C33.570313 27.996094 34 28.949219 34 30C34 32.210938 32.210938 34 30 34C27.789063 34 26 32.210938 26 30C26 28.359375 26.996094 26.960938 28.40625 26.34375L28.3125 26.3125C28.117188 25.917969 28 25.472656 28 25C28 23.34375 29.34375 22 31 22 Z M 21 32C23.210938 32 25 33.789063 25 36C25 36.855469 24.710938 37.660156 24.25 38.3125L20.3125 39.9375C18.429688 39.609375 17 37.976563 17 36C17 33.789063 18.789063 32 21 32 Z M 9 34C10.65625 34 12 35.34375 12 37C12 38.65625 10.65625 40 9 40C7.902344 40 6.960938 39.414063 6.4375 38.53125L8.25 34.09375C8.488281 34.03125 8.742188 34 9 34Z"></path>
+            </svg>
+            <strong>Hover Me</strong>
+          </div>
+        </div>
+
+        <div class="front">
+          <div class="img">
+            <div class="circle"></div>
+            <div class="circle" id="right"></div>
+            <div class="circle" id="bottom"></div>
+          </div>
+
+          <div class="front-content">
+            <small class="badge">Pasta</small>
+            <div class="description">
+              <div class="title">
+                <p class="title"><strong>Spaguetti Bolognese</strong></p>
+                <svg height="15px" width="15px" viewBox="0,0,256,256" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></svg>
+              </div>
+              <p class="card-footer">30 Mins &nbsp; | &nbsp; 1 Serving</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards">
+
+    <!-- ******* KARTA 1 ******* -->
+    <div class="card">
+      <div class="content">
+        <div class="back">
+          <div class="back-content">
+            <svg stroke="#ffffff" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="50px" width="50px" fill="#ffffff">
+              <path d="M20.84375 0.03125C20.191406 0.0703125 19.652344 0.425781 19.21875 1.53125C18.988281 2.117188 18.5 3.558594 18.03125 4.9375C17.792969 5.636719 17.570313 6.273438 17.40625 6.75C17.390625 6.796875 17.414063 6.855469 17.40625 6.90625C17.398438 6.925781 17.351563 6.949219 17.34375 6.96875L17.25 7.25C18.566406 7.65625 19.539063 8.058594 19.625 8.09375C22.597656 9.21875 28.351563 11.847656 33.28125 16.78125C38.5 22 41.183594 28.265625 42.09375 30.71875C42.113281 30.761719 42.375 31.535156 42.75 32.84375C42.757813 32.839844 42.777344 32.847656 42.78125 32.84375C43.34375 32.664063 44.953125 32.09375 46.3125 31.625C47.109375 31.351563 47.808594 31.117188 48.15625 31C49.003906 30.714844 49.542969 30.292969 49.8125 29.6875C50.074219 29.109375 50.066406 28.429688 49.75 27.6875C49.605469 27.347656 49.441406 26.917969 49.25 26.4375C47.878906 23.007813 45.007813 15.882813 39.59375 10.46875C33.613281 4.484375 25.792969 1.210938 22.125 0.21875C21.648438 0.0898438 21.234375 0.0078125 20.84375 0.03125 Z M 16.46875 9.09375L0.0625 48.625C-0.09375 48.996094 -0.00390625 49.433594 0.28125 49.71875C0.472656 49.910156 0.738281 50 1 50C1.128906 50 1.253906 49.988281 1.375 49.9375L40.90625 33.59375C40.523438 32.242188 40.222656 31.449219 40.21875 31.4375C39.351563 29.089844 36.816406 23.128906 31.875 18.1875C27.035156 13.34375 21.167969 10.804688 18.875 9.9375C18.84375 9.925781 17.8125 9.5 16.46875 9.09375 Z M 17 16C19.761719 16 22 18.238281 22 21C22 23.761719 19.761719 26 17 26C15.140625 26 13.550781 24.972656 12.6875 23.46875L15.6875 16.1875C16.101563 16.074219 16.550781 16 17 16 Z M 31 22C32.65625 22 34 23.34375 34 25C34 25.917969 33.585938 26.730469 32.9375 27.28125L32.90625 27.28125C33.570313 27.996094 34 28.949219 34 30C34 32.210938 32.210938 34 30 34C27.789063 34 26 32.210938 26 30C26 28.359375 26.996094 26.960938 28.40625 26.34375L28.3125 26.3125C28.117188 25.917969 28 25.472656 28 25C28 23.34375 29.34375 22 31 22 Z M 21 32C23.210938 32 25 33.789063 25 36C25 36.855469 24.710938 37.660156 24.25 38.3125L20.3125 39.9375C18.429688 39.609375 17 37.976563 17 36C17 33.789063 18.789063 32 21 32 Z M 9 34C10.65625 34 12 35.34375 12 37C12 38.65625 10.65625 40 9 40C7.902344 40 6.960938 39.414063 6.4375 38.53125L8.25 34.09375C8.488281 34.03125 8.742188 34 9 34Z"></path>
+            </svg>
+            <strong>Hover Me</strong>
+          </div>
+        </div>
+
+        <div class="front">
+          <div class="img">
+            <div class="circle"></div>
+            <div class="circle" id="right"></div>
+            <div class="circle" id="bottom"></div>
+          </div>
+
+          <div class="front-content">
+            <small class="badge">Pasta</small>
+            <div class="description">
+              <div class="title">
+                <p class="title"><strong>Spaguetti Bolognese</strong></p>
+                <svg height="15px" width="15px" viewBox="0,0,256,256" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></svg>
+              </div>
+              <p class="card-footer">30 Mins &nbsp; | &nbsp; 1 Serving</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<style>
+/* ====== GRID 3 KART ====== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  justify-items: center;
+}
+
+/* ====== POWIĘKSZENIE KARTY x2 ====== */
+.card {
+  overflow: visible;
+  width: 380px !important;   /* było 190 */
+  height: 508px !important;  /* było 254 */
+}
+
+/* ====== ORYGINALNY STYL ====== */
+.content {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 300ms;
+  box-shadow: 0px 0px 10px 1px #000000ee;
+  border-radius: 5px;
+}
+
+.front, .back {
+  background-color: #070707;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back::before {
+  position: absolute;
+  content: '';
+  width: 160px;
+  height: 160%;
+  background: linear-gradient(90deg, transparent, #ffffff, #53f0d8, #53f0d8, #53f0d8, transparent);
+  animation: rotation_481 5000ms infinite linear;
+}
+
+.back-content {
+  position: absolute;
+  width: 99%;
+  height: 99%;
+  background-color: #070707;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.card:hover .content {
+  transform: rotateY(180deg);
+}
+
+@keyframes rotation_481 {
+  0% { transform: rotateZ(0deg); }
+  100% { transform: rotateZ(360deg); }
+}
+
+.front {
+  transform: rotateY(180deg);
+  color: white;
+}
+
+.front .front-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.front-content .badge {
+  background-color: #00000055;
+  padding: 2px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+}
+
+.description {
+  box-shadow: 0px 0px 10px 5px #00000088;
+  padding: 10px;
+  background-color: #00000099;
+  border-radius: 5px;
+}
+
+.title {
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-footer {
+  color: #ffffff88;
+  font-size: 8px;
+}
+
+.front .img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #53f0d8;
+  position: relative;
+  filter: blur(15px);
+  animation: floating 2600ms infinite linear;
+}
+
+#bottom {
+  left: 50px;
+  top: 0px;
+  width: 150px;
+  height: 150px;
+  animation-delay: -800ms;
+}
+
+#right {
+  left: 160px;
+  top: -80px;
+  width: 30px;
+  height: 30px;
+  animation-delay: -1800ms;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ====== RESPONSYWNOŚĆ ====== */
+@media(max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card {
+  overflow: visible;
+  width: 280px !important;   /* było 190 */
+  height: 408px !important;  /* było 254 */
+}
+}
+@media(max-width: 650px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .card {
+  overflow: visible;
+  width: 280px !important;   /* było 190 */
+  height: 408px !important;  /* było 254 */
+}
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-16">Czym się zajmuję?</h2>
+    <div class="grid md:grid-cols-3 gap-12 justify-items-center">
+      <!-- Powiel karty jak wyżej -->
+      <div class="relative w-80 h-96 perspective">
+        <div class="flip-card w-full h-full relative transform-style-3d shadow-2xl">
+          <div class="flip-card-front absolute w-full h-full backface-hidden rounded-xl overflow-hidden flex flex-col items-center justify-center p-6 text-center"
+               style="background-image: url('okokbg.jpg'); background-size: cover; background-position: center;">
+            <div class="bg-black/50 absolute inset-0 rounded-xl"></div>
+      <div class="relative z-10 flex flex-col items-center justify-center h-full">
+        <h3 class="text-2xl font-bold text-white mb-8 mt-[-60px]">Nagłówek</h3>
+        <p class="text-white/80 mb-4">
+          lly unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+
+        <span class="absolute bottom-3 text-gray-400 text-sm tracking-wide"
+              style="font-family: 'Titillium Web', sans-serif;">
+          CZYTAJ WIĘCEJ  ⭢
+        </span>
+      </div>
+          </div>
+          <div class="flip-card-back absolute w-full h-full backface-hidden rotate-y-180 rounded-xl overflow-hidden flex flex-col items-center justify-center p-6 text-center"
+               style="background-image: url('okokbg.jpg'); background-size: cover; background-position: center;">
+            <div class="bg-black/50 absolute inset-0 rounded-xl"></div>
+            <div class="relative z-10">
+              <p class="text-white/80 mb-4">          lly unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.          lly unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Powiel dla 2 i 3 karty -->
+      <div class="relative w-80 h-96 perspective">
+        <div class="flip-card w-full h-full relative transform-style-3d shadow-2xl">
+          <div class="flip-card-front absolute w-full h-full backface-hidden rounded-xl overflow-hidden flex flex-col items-center justify-center p-6 text-center"
+               style="background-image: url('okokbg.jpg'); background-size: cover; background-position: center;">
+            <div class="bg-black/50 absolute inset-0 rounded-xl"></div>
+      <div class="relative z-10 flex flex-col items-center justify-center h-full">
+        <h3 class="text-2xl font-bold text-white mb-8 mt-[-60px]">Nagłówek</h3>
+        <p class="text-white/80 mb-4">
+          lly unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+
+        <span class="absolute bottom-3 text-gray-400 text-sm tracking-wide"
+              style="font-family: 'Titillium Web', sans-serif;">
+          CZYTAJ WIĘCEJ  ⭢
+        </span>
+      </div>
+          </div>
+          <div class="flip-card-back absolute w-full h-full backface-hidden rotate-y-180 rounded-xl overflow-hidden flex flex-col items-center justify-center p-6 text-center"
+               style="background-image: url('okokbg.jpg'); background-size: cover; background-position: center;">
+            <div class="bg-black/50 absolute inset-0 rounded-xl"></div>
+            <div class="relative z-10">
+              <p class="text-white/80 mb-4">          lly unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. lly unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Powiel dla 2 i 3 karty -->
+      <div class="relative w-80 h-96 perspective">
+        <div class="flip-card w-full h-full relative transform-style-3d shadow-2xl">
+          <div class="flip-card-front absolute w-full h-full backface-hidden rounded-xl overflow-hidden flex flex-col items-center justify-center p-6 text-center"
+               style="background-image: url('okokbg.jpg'); background-size: cover; background-position: center;">
+            <div class="bg-black/50 absolute inset-0 rounded-xl"></div>
+      <div class="relative z-10 flex flex-col items-center justify-center h-full">
+        <h3 class="text-2xl font-bold text-white mb-8 mt-[-60px]">Nagłówek</h3>
+        <p class="text-white/80 mb-4">
+          lly unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+
+        <span class="absolute bottom-3 text-gray-400 text-sm tracking-wide"
+              style="font-family: 'Titillium Web', sans-serif;">
+          CZYTAJ WIĘCEJ  ⭢
+        </span>
+      </div>
+          </div>
+          <div class="flip-card-back absolute w-full h-full backface-hidden rotate-y-180 rounded-xl overflow-hidden flex flex-col items-center justify-center p-6 text-center"
+               style="background-image: url('okokbg.jpg'); background-size: cover; background-position: center;">
+            <div class="bg-black/50 absolute inset-0 rounded-xl"></div>
+            <div class="relative z-10">
+              <p class="text-white/80 mb-4">          lly unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.          lly unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Powiel dla 2 i 3 karty -->
+    </div>
+  </div>
+</section>
+
+<div class="w-full py-8">
+  <!-- CAROUSEL dla małych i średnich ekranów -->
+  <div class="block lg:hidden relative w-full overflow-hidden">
+    <!-- Strzałki -->
+    <button id="prev" class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-neutral-800/70 hover:bg-neutral-700 text-white p-2 rounded-full">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button id="next" class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-neutral-800/70 hover:bg-neutral-700 text-white p-2 rounded-full">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div id="carousel" class="flex gap-6 overflow-x-hidden overflow-y-hidden snap-x snap-mandatory scroll-smooth px-6">
+      <!-- Karta 1 -->
+      <div class="min-w-[280px] max-w-[280px] bg-neutral-950 p-6 rounded-2xl border border-neutral-800 hover:border-neutral-700 flex-shrink-0 snap-center">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6">
+          <i class="fa-solid fa-calculator text-2xl text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-white">Darmowa Wycena Projektu</h3>
+        <p class="text-gray-400 text-sm">
+          Umów się na niezobowiązującą rozmowę i otrzymaj szczegółową wycenę projektu.
+        </p>
+      </div>
+
+      <!-- Karta 2 -->
+      <div class="min-w-[280px] max-w-[280px] bg-neutral-950 p-6 rounded-2xl border border-neutral-800 hover:border-neutral-700 flex-shrink-0 snap-center">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6">
+          <i class="fa-solid fa-pencil-ruler text-2xl text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-white">Projekt Indywidualny <span class="text-blue-500 text-sm ml-2">Premium</span></h3>
+        <p class="text-gray-400 text-sm mb-4">
+          Dedykowany projekt od podstaw, szyty na miarę Twojej marki.
+        </p>
+        <ul class="text-gray-400 text-sm space-y-1">
+          <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Personalizacja pod markę</li>
+          <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Optymalizacja SEO</li>
+          <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Wsparcie po wdrożeniu</li>
+        </ul>
+      </div>
+
+      <!-- Karta 3 -->
+      <div class="min-w-[280px] max-w-[280px] bg-neutral-950 p-6 rounded-2xl border border-neutral-800 hover:border-neutral-700 flex-shrink-0 snap-center">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6">
+          <i class="fa-solid fa-layer-group text-2xl text-white"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-white">Gotowe Szablony <span class="text-green-500 text-sm ml-2">Szybka realizacja</span></h3>
+        <p class="text-gray-400 text-sm mb-4">
+          Wybierz jeden z gotowych szablonów i dopasuj go do swojej marki w krótkim czasie.
+        </p>
+        <ul class="text-gray-400 text-sm space-y-1">
+          <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Szybki czas realizacji</li>
+          <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Personalizacja kolorów i treści</li>
+          <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Optymalizacja SEO</li>
+        </ul>
+        <a href="szablony.html" class="mt-4 inline-block bg-green-600 text-white py-2 px-4 rounded-lg font-semibold transition hover:bg-green-500 text-sm">
+          Zobacz wszystkie szablony
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATYCZNE KARTY dla dużych ekranów -->
+  <div class="hidden lg:flex gap-8 justify-center py-8">
+    <!-- Karta 1 -->
+    <div class="w-[280px] bg-neutral-950 p-6 rounded-2xl border border-neutral-800 hover:border-neutral-700">
+      <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6">
+        <i class="fa-solid fa-calculator text-2xl text-white"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-2 text-white">Darmowa Wycena Projektu</h3>
+      <p class="text-gray-400 text-sm">
+        Umów się na niezobowiązującą rozmowę i otrzymaj szczegółową wycenę projektu.
+      </p>
+    </div>
+
+    <!-- Karta 2 -->
+    <div class="w-[280px] bg-neutral-950 p-6 rounded-2xl border border-neutral-800 hover:border-neutral-700">
+      <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6">
+        <i class="fa-solid fa-pencil-ruler text-2xl text-white"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-2 text-white">Projekt Indywidualny <span class="text-blue-500 text-sm ml-2">Premium</span></h3>
+      <p class="text-gray-400 text-sm mb-4">
+        Dedykowany projekt od podstaw, szyty na miarę Twojej marki.
+      </p>
+      <ul class="text-gray-400 text-sm space-y-1">
+        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Personalizacja pod markę</li>
+        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Optymalizacja SEO</li>
+        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Wsparcie po wdrożeniu</li>
+      </ul>
+    </div>
+
+    <!-- Karta 3 -->
+    <div class="w-[280px] bg-neutral-950 p-6 rounded-2xl border border-neutral-800 hover:border-neutral-700">
+      <div class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-800 mb-6">
+        <i class="fa-solid fa-layer-group text-2xl text-white"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-2 text-white">Gotowe Szablony <span class="text-green-500 text-sm ml-2">Szybka realizacja</span></h3>
+      <p class="text-gray-400 text-sm mb-4">
+        Wybierz jeden z gotowych szablonów i dopasuj go do swojej marki w krótkim czasie.
+      </p>
+      <ul class="text-gray-400 text-sm space-y-1">
+        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Szybki czas realizacji</li>
+        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Personalizacja kolorów i treści</li>
+        <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Optymalizacja SEO</li>
+      </ul>
+      <a href="szablony.html" class="mt-4 inline-block bg-green-600 text-white py-2 px-4 rounded-lg font-semibold transition hover:bg-green-500 text-sm hover:color-[#53f0d8]">
+        Zobacz wszystkie szablony
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+const carousel = document.getElementById('carousel');
+const next = document.getElementById('next');
+const prev = document.getElementById('prev');
+
+if (carousel) {
+  const getCardWidth = () => carousel.children[0].offsetWidth + 24; // 24 = gap-6
+
+  next.addEventListener('click', () => {
+    carousel.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+  });
+
+  prev.addEventListener('click', () => {
+    carousel.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+  });
+
+  let autoScroll = setInterval(() => {
+    if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+      carousel.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      carousel.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+    }
+  }, 5000);
+
+  carousel.addEventListener('mouseenter', () => clearInterval(autoScroll));
+  carousel.addEventListener('mouseleave', () => {
+    autoScroll = setInterval(() => {
+      if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        carousel.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+      }
+    }, 5000);
+  });
+}
+</script>
+
+<section class="w-full py-10">
+  <h2 class="text-3xl font-bold text-center mb-6">Portfolio</h2>
+
+  <!-- max-w zmniejszone NA PC: 900px -->
+  <div class="relative overflow-hidden max-w-lg mx-auto rounded-xl">
+    <div id="slider-track" class="flex transition-transform duration-700 ease-in-out">
+
+      <!-- SLIDE 1 -->
+      <a href="CarSerwis.html" class="min-w-full px-2 md:px-1">
+        <div class="relative w-full h-64 rounded-lg shadow-lg overflow-hidden group">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+               style='background-image: url("resPorFryzjerstwo1.jpg");'></div>
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+            <h2 class="text-white text-lg font-bold">Mechanik Samochodowy | DEMO</h2>
+          </div>
+        </div>
+      </a>
+
+      <!-- SLIDE 2 -->
+      <a href="Projekt2.html" class="min-w-full px-2 md:px-1">
+        <div class="relative w-full h-64 rounded-lg shadow-lg overflow-hidden group">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+               style='background-image: url("resPorPrzewodnik.jpg");'></div>
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+            <h2 class="text-white text-lg font-bold">Projekt 2 | DEMO</h2>
+          </div>
+        </div>
+      </a>
+
+      <!-- SLIDE 3 -->
+      <a href="Projekt3.html" class="min-w-full px-2 md:px-1">
+        <div class="relative w-full h-64 rounded-lg shadow-lg overflow-hidden group">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+               style='background-image: url("ResPortMechanik.jpg");'></div>
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+            <h2 class="text-white text-lg font-bold">Projekt 3 | DEMO</h2>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+<div class="text-center mt-2">
+  <a href="#" class="btn-shine">Zobacz wszystkie szablony</a>
+</div>
+
+<style>
+.btn-shine,
+.btn-shine:link,
+.btn-shine:visited,
+.btn-shine:hover,
+.btn-shine:active {
+  text-decoration: none !important;
+}
+
+.btn-shine {
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap;
+
+  background: linear-gradient(to right, #9f9f9f 0, #fff 10%, #868686 20%);
+  background-size: 200% auto;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0%   { background-position: 0% 0; }
+  100% { background-position: -200% 0; }
+}
+</style>
+
+  </span>
+</div>
+
+</section>
+
+<script>
+  const track = document.getElementById("slider-track");
+  const slides = track.children;
+  let index = 0;
+
+  function nextSlide() {
+    index++;
+    if (index >= slides.length) index = 0;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  setInterval(nextSlide, 3000);
+</script>
+ <style>
+    .timeline-container { position: relative; }
+    .timeline-item { opacity: 0; transform: translateY(30px); transition: opacity 0.45s ease, transform 0.45s ease; }
+    .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+    .timeline-line {
+      position: absolute;
+      left: 22px;
+      top: 28px;
+      width: 3px;
+      height: 0;
+      background: #53f0d8;
+      box-shadow: 0 0 10px #53f0d8;
+      border-radius: 2px;
+      z-index: 0;
+    }
+
+    /* animowany ring */
+    .ring-animate svg circle {
+      stroke-dasharray: 283; /* obwód okręgu (2 * PI * r) dla r=45px */
+      stroke-dashoffset: 283;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+      transition: stroke-dashoffset 0.6s ease;
+    }
+
+    .ring-animate.active svg circle {
+      stroke-dashoffset: 0;
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-gray-900 font-sans">
+
+<main class="flex-grow container mx-auto px-6 py-12 mt-28 font-display" id="process-section">
+  <h1 class="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">Współpraca</h1>
+
+  <div class="relative max-w-2xl mx-auto timeline-container">
+
+    <!-- ANIMOWANA LINIA -->
+    <div class="timeline-line" id="processLine"></div>
+
+    <div class="space-y-16">
+
+      <!-- KROK 1 -->
+      <div class="timeline-item relative pl-16">
+        <div class="timeline-icon absolute left-0 top-0 flex items-center justify-center w-14 h-14 rounded-full bg-black">
+          <svg class="ring-animate w-14 h-14 absolute top-0 left-0" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" stroke="#53f0d8" stroke-width="6" fill="transparent"/>
+          </svg>
+          <i class="fas fa-lightbulb text-white z-10"></i>
+        </div>
+        <div class="timeline-content bg-[#2B2B2B] rounded-xl shadow-md p-6 ml-6 border-l-4 border-[#53f0d8]">
+          <h3 class="text-xl font-bold text-gray-100">Krok 1: Konsultacja</h3>
+          <p class="mt-1 text-gray-300">
+            Zaczynamy od rozmowy…
+          </p>
+        </div>
+      </div>
+
+      <!-- KROK 2 -->
+      <div class="timeline-item relative pl-16">
+        <div class="timeline-icon absolute left-0 top-0 flex items-center justify-center w-14 h-14 rounded-full bg-black">
+          <svg class="ring-animate w-14 h-14 absolute top-0 left-0" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" stroke="#53f0d8" stroke-width="6" fill="transparent"/>
+          </svg>
+          <i class="fas fa-pencil-ruler text-white z-10"></i>
+        </div>
+        <div class="timeline-content bg-[#2B2B2B] rounded-xl shadow-md p-6 ml-6 border-l-4 border-[#53f0d8]">
+          <h3 class="text-xl font-bold text-gray-100">Krok 2: Oferta i wycena</h3>
+          <p class="mt-1 text-gray-300">
+            Po zebraniu informacji…
+          </p>
+        </div>
+      </div>
+
+      <!-- KROK 3 -->
+      <div class="timeline-item relative pl-16">
+        <div class="timeline-icon absolute left-0 top-0 flex items-center justify-center w-14 h-14 rounded-full bg-black">
+          <svg class="ring-animate w-14 h-14 absolute top-0 left-0" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" stroke="#53f0d8" stroke-width="6" fill="transparent"/>
+          </svg>
+          <i class="fas fa-code text-white z-10"></i>
+        </div>
+        <div class="timeline-content bg-[#2B2B2B] rounded-xl shadow-md p-6 ml-6 border-l-4 border-[#53f0d8]">
+          <h3 class="text-xl font-bold text-gray-100">Krok 3: Projekt i Kodowanie</h3>
+          <p class="mt-1 text-gray-300">
+            Na tym etapie tworzę koncepcję…
+          </p>
+        </div>
+      </div>
+
+      <!-- KROK 4 -->
+      <div class="timeline-item relative pl-16">
+        <div class="timeline-icon absolute left-0 top-0 flex items-center justify-center w-14 h-14 rounded-full bg-black">
+          <svg class="ring-animate w-14 h-14 absolute top-0 left-0" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" stroke="#53f0d8" stroke-width="6" fill="transparent"/>
+          </svg>
+          <i class="fas fa-headset text-white z-10"></i>
+        </div>
+        <div class="timeline-content bg-[#2B2B2B] rounded-xl shadow-md p-6 ml-6 border-l-4 border-[#53f0d8]">
+          <h3 class="text-xl font-bold text-gray-100">Krok 4: Wsparcie po wdrożeniu</h3>
+          <p class="mt-1 text-gray-300">
+            Jeśli chcesz dodawać treści…
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </main>
 
-<footer class="bg-background-dark text-gray-400 py-10 mt-16 fade-in">
-  <!-- Twój footer -->
+<script>
+let ticking2 = false;
+let lastScroll2 = 0;
+
+window.addEventListener('scroll', () => {
+  lastScroll2 = window.scrollY;
+  if (!ticking2) {
+    requestAnimationFrame(() => {
+      animateProcessTimeline(lastScroll2);
+      ticking2 = false;
+    });
+    ticking2 = true;
+  }
+});
+
+function animateProcessTimeline(scrollY) {
+  const section = document.querySelector('#process-section');
+  const line = document.querySelector('#processLine');
+  const items = section.querySelectorAll('.timeline-item');
+
+  const rect = section.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  if (rect.top < windowHeight && rect.bottom > 0) {
+
+    const start = scrollY + rect.top - windowHeight * 0.3;
+    const end = scrollY + rect.bottom - windowHeight * 0.6;
+
+    const raw = (scrollY - start) / (end - start);
+    const progress = Math.min(1, Math.max(0, raw * 1.25));
+
+    const first = items[0].offsetTop + 20;
+    const last = items[items.length - 1].offsetTop + 40;
+
+    const maxH = last - first;
+
+    line.style.height = (maxH * progress) + "px";
+
+    items.forEach(item => {
+      const itemTop = item.offsetTop - first - 20;
+      const isVisible = maxH * progress >= itemTop;
+      item.classList.toggle("visible", isVisible);
+
+      // animacja ringa
+      const ring = item.querySelector('.ring-animate');
+      if(ring){
+        if(isVisible){
+          ring.classList.add('active');
+        } else {
+          ring.classList.remove('active');
+        }
+      }
+    });
+  }
+}
+</script>
+<style>
+@keyframes fade-up {
+    0% { opacity: 0; transform: translateY(25px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+.fade-up {
+    animation: fade-up 0.9s ease-out forwards;
+}
+
+.float {
+    animation: float 4.5s ease-in-out infinite;
+}
+</style>
+
+
+<section class="w-full p-12 px-[5%] bg-black rounded-2xl my-16 fade-up">
+    <div class="flex items-center justify-center gap-10 flex-wrap">
+
+        <!-- Zdjęcie -->
+        <div class="transform transition-all duration-500 hover:scale-105">
+            <img 
+                src="twoje-zdjecie.jpg" 
+                alt="Gracjan Śliwiński"
+                class="w-[260px] h-[260px] object-cover rounded-2xl shadow-2xl float"
+            >
+        </div>
+
+        <!-- Tekst -->
+        <div class="max-w-[600px] text-white fade-up" style="animation-delay: .25s;">
+            <h2 class="text-[2.3rem] mb-5 font-semibold tracking-tight">
+                O mnie
+            </h2>
+
+            <p class="mb-4 text-gray-300 leading-relaxed text-[1.15rem]">
+                Cześć, nazywam się Gracjan. Projektuję i tworzę strony internetowe od podstaw —
+                bez gotowców i skrótów. Każdy projekt to indywidualna realizacja tworzona ręcznie,
+                z uwzględnieniem Twoich celów, odbiorców i specyfiki branży.
+            </p>
+
+            <p class="text-gray-300 leading-relaxed text-[1.15rem]">
+                Nie korzystam z WordPressa ani innych CMS-ów — nie buduję na szablonach.  
+                Każda strona, którą oddaję, jest szybka, lekka, stabilna i spójna na każdym urządzeniu.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+  </main>
+
+
+<footer class="bg-black py-6 mt-8 fade-in">
+  <div class="container mx-auto px-4 text-center text-sm text-white/80">
+    &copy; <span id="year"></span> Gracjan Śliwiński Wszelkie prawa zastrzeżone
+  </div>
 </footer>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // HERO
+  const hero = document.getElementById('hero');
+  function setHeroHeight() { hero.style.height = `${window.innerHeight}px`; }
+  setHeroHeight();
+  window.addEventListener('resize', setHeroHeight);
+
+  // POPUP
+  const btn = document.getElementById('join-btn');
+  const popup = document.getElementById('popup');
+  const popupBox = document.getElementById('popup-box');
+  const closeBtn = document.getElementById('close-popup');
+
+  function showPopup() {
+    popup.classList.remove('hidden'); popup.classList.add('flex');
+    void popup.offsetHeight;
+    popup.classList.remove('opacity-0'); popup.classList.add('opacity-100');
+    popupBox.style.animation = 'popupIn 300ms ease forwards';
+  }
+  function hidePopup() {
+    popupBox.style.animation = 'popupOut 220ms ease forwards';
+    popup.classList.remove('opacity-100'); popup.classList.add('opacity-0');
+    popup.addEventListener('transitionend', function onEnd(e){
+      if(e.propertyName==='opacity'){ popup.removeEventListener('transitionend', onEnd); popup.classList.remove('flex'); popup.classList.add('hidden'); popupBox.style.animation=''; }
+    });
+  }
+
+  btn.addEventListener('click', showPopup);
+  closeBtn.addEventListener('click', hidePopup);
+  popup.addEventListener('click', e => { if(e.target === popup) hidePopup(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape' && !popup.classList.contains('hidden')) hidePopup(); });
+
+  // Fade-in
+  const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold:0.1, rootMargin:"0px 0px -50px 0px" });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // MENU
+  const menuBtn = document.getElementById('menuBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  const header = document.getElementById('navbar');
+  const htmlEl = document.documentElement;
+  let open=false;
+  function openMenu(){ open=true; menuBtn.classList.add('menu-open'); mobilePanel.style.transform='translateY(0)'; mobilePanel.style.opacity='1'; mobilePanel.style.pointerEvents='auto'; htmlEl.style.overflow='hidden'; }
+  function closeMenu(){ open=false; menuBtn.classList.remove('menu-open'); mobilePanel.style.transform='translateY(-6%)'; mobilePanel.style.opacity='0'; mobilePanel.style.pointerEvents='none'; htmlEl.style.overflow=''; }
+  menuBtn.addEventListener('click', ()=>open?closeMenu():openMenu());
+  mobilePanel.addEventListener('click', e => { if(e.target.tagName==='A') closeMenu(); });
+  window.addEventListener('scroll', ()=>{ window.scrollY>8?header.classList.add('nav-scrolled'):header.classList.remove('nav-scrolled'); }, {passive:true});
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // HERO OVERLAY
+  const heroOverlay = document.getElementById('heroOverlay');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    heroOverlay.style.backgroundColor = `rgba(0,0,0,${Math.min(0.45, 0.35 + scrollY/400)})`;
+    heroOverlay.style.backdropFilter = `blur(${Math.min(4, scrollY/80)}px)`;
+  }, {passive:true});
+
+  // UNIVERSAL PARALLAX
+  const parallaxElements = document.querySelectorAll('.parallax');
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.pageYOffset;
+    parallaxElements.forEach(el => { el.style.backgroundPosition = `center calc(50% + ${scrollPos*0.5}px)`; });
+  }, {passive:true});
+
+  // KARTY ANIMACJA I CLICK
+  document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.style.transform = card.style.transform==='rotateY(180deg)'?'rotateY(0deg)':'rotateY(180deg)';
+    });
+  });
+  const flipCards = document.querySelectorAll('.flip-card');
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      const card = entry.target;
+      if(entry.isIntersecting && !card.classList.contains('animated')){
+        card.classList.add('animated','animate-once');
+        setTimeout(()=>{
+          card.classList.add('finish');
+          setTimeout(()=>{ card.classList.remove('animate-once','finish'); },400);
+        }, 400+index*100);
+      }
+    });
+  }, { threshold:0.5 });
+  flipCards.forEach(card=>cardObserver.observe(card));
+});
+</script>
+<!--scrolbar-->
 <script>
 let scrollTarget = 0;
 let scrollCurrent = 0;
@@ -620,298 +1370,22 @@ window.addEventListener('scroll', () => {
 </script>
 
 
-  <!-- Wstawiona galeria partnerów -->
-  <section class="bg-background-dark py-12 md:py-40" id="youtube">
-    <h2 class="text-gray-800 dark:text-white text-[24px] font-bold px-6 pb-6 fade-in">Obdarzyli mnie zaufaniem</h2>
-
-
-    <div class="logo-carousel fade-in">
-      <div class="logo-track" id="logoTrack" aria-hidden="true">
-        <div class="logo-group">
-            <p></p>
-          <a href="https://wkdzik.pl/" target="_blank"><img src="aaawk.png" alt="Logo 1"></a>
-          <a href="https://pancernik.eu/" target="_blank"><img src="pancerniklogo.webp" alt="Logo 2"></a>
-          <a href="https://www.dorcoglobal.com/" target="_blank"><img src="dorcologo.png" alt="Logo 3" class="invert"></a>
-          <a href="https://marpanel.pl/" target="_blank"><img src="logomaranel.svg" alt="Logo 4" class="invert"></a>
-        </div>
-        <div class="logo-group" aria-hidden="true">
-            <p></p>
-          <a href="https://wkdzik.pl/" target="_blank"><img src="aaawk.png" alt="Logo 1"></a>
-          <a href="https://pancernik.eu/" target="_blank"><img src="pancerniklogo.webp" alt="Logo 2"></a>
-          <a href="https://www.dorcoglobal.com/" target="_blank"><img src="dorcologo.png" alt="Logo 3" class="invert"></a>
-          <a href="https://marpanel.pl/" target="_blank"><img src="logomaranel.svg" alt="Logo 4" class="invert"></a>
-        </div>
-      </div>
+<!-- POPUP -->
+<div id="popup" class="hidden fixed inset-0 bg-black/70 items-center justify-center opacity-0 transition-opacity duration-300 z-50">
+  <div id="popup-box" class="bg-white text-black p-6 sm:p-8 rounded-lg max-w-md w-full mx-4 sm:mx-auto relative text-center">
+    <button id="close-popup" class="absolute top-2 right-3 text-gray-600 hover:text-black text-2xl leading-none">&times;</button>
+    <h2 class="text-2xl font-bold mb-4">Cześć, dołącz do społeczności</h2>
+    <p class="mb-6 text-gray-700">Odwiedź moje profile społecznościowe klikając na ikonę aplikacji</p>
+    <div class="flex justify-center gap-6">
+      <a href="https://www.linkedin.com/in/twojprofil" target="_blank" class="flex items-center justify-center w-14 h-14 rounded-full bg-[#0A66C2] text-white hover:opacity-90 transition">
+        <i class="fab fa-linkedin-in text-2xl"></i>
+      </a>
+      <a href="https://www.instagram.com/twojprofil" target="_blank" class="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] text-white hover:opacity-90 transition">
+        <i class="fab fa-instagram text-2xl"></i>
+      </a>
     </div>
-
-<section class="bg-background-dark py-8 md:py-40 fade-in"></section>
-
-<section class="bg-background-light dark:bg-background-dark py-8 px-4" id="contact">
-  <div class="max-w-md mx-auto text-center">
-    <h2 class="text-gray-800 dark:text-white text-3xl font-bold mb-4 fade-in">Zarzuć pomysłem</h2>
-    <p class="text-gray-600 dark:text-gray-400 mb-8 fade-in">
-      Podziel się tym, co chciałbyś zobaczyć u mnie na social mediach.
-    </p>
-
-    <form action="#" class="flex flex-col sm:flex-row gap-4 fade-in" method="POST">
-      <div class="flex-grow">
-        <textarea id="idea" name="idea" placeholder="Twój pomysł"
-          rows="1"
-          class="resize-none w-full rounded-md border border-gray-300 dark:border-gray-600 bg-background-light dark:bg-gray-800 text-gray-900 dark:text-gray-200 focus:ring-primary focus:border-primary overflow-hidden transition-all duration-200"></textarea>
-      </div>
-
-      <button type="submit"
-        class="sm:w-auto w-full py-3 px-8 rounded-md text-sm font-medium text-white bg-primary hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-        Wyślij
-      </button>
-    </form>
   </div>
-</section>
-
-<script>
-const textarea = document.getElementById('idea');
-textarea.addEventListener('input', () => {
-  textarea.style.height = 'auto';
-  textarea.style.height = textarea.scrollHeight + 'px';
-});
-</script>
-
-<footer class="bg-background-dark text-gray-400 py-10 mt-16 fade-in">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center md:text-left">
-  </div>
-
-  <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
-    © <span id="year"></span> Michał Koziar. Wszystkie prawa zastrzeżone | Realizacja: <a href="https://gracjan-gs.github.io/" target="_blank"><span style="color: #ea2b33; text-decoration: underline;">Gracjan Śliwiński.</span></a>
-    <br>
-    <span class="inline-block mt-3">
-      <i class="fa-solid fa-up-right-from-square mr-1" style="color: #ffffff;"></i>
-      <a href="#" class="hover:text-primary transition" style="color: #ffffff;">Polityka prywatności</a>
-    </span>
-  </div>
-</footer>
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-</main>
-    <style>
-      :root {
-        --duration: 12s;
-        --gap: 3rem;
-        --height: 6rem;
-        --maxw: 80%;
-      }
-      .logo-carousel {
-        max-width: var(--maxw);
-        margin: 0 auto;
-        overflow: hidden;
-        padding: 3rem 0;
-      }
-      .logo-track {
-        display: flex;
-        align-items: center;
-        width: max-content;
-        animation: scroll var(--duration) linear infinite;
-      }
-      .logo-group {
-        display: flex;
-        align-items: center;
-        gap: var(--gap);
-        flex: 0 0 auto;
-      }
-      .logo-track img {
-        height: var(--height);
-        width: auto;
-        flex: 0 0 auto;
-        filter: brightness(0) invert(1);
-        opacity: 0.95;
-        transition: transform .25s ease, opacity .25s ease;
-      }
-      .logo-track img:hover {
-        transform: scale(1.05);
-        opacity: 1;
-      }
-      @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-      }
-      .logo-track, .logo-group, .logo-track img { margin: 0; padding: 0; }
-    </style>
-
-    <script>
-      (function(){
-        const track = document.getElementById('logoTrack');
-        if (!track) return;
-        const carousel = track.parentElement;
-        function ensureEnoughContent(){
-          const trackW = track.getBoundingClientRect().width;
-          const containerW = carousel.getBoundingClientRect().width;
-          if (trackW < containerW * 2) {
-            const groups = Array.from(track.querySelectorAll('.logo-group'));
-            groups.forEach(g=>{
-              const clone = g.cloneNode(true);
-              clone.setAttribute('aria-hidden','true');
-              track.appendChild(clone);
-            });
-            setTimeout(ensureEnoughContent, 20);
-          }
-        }
-        ensureEnoughContent();
-        window.addEventListener('resize', function(){
-          clearTimeout(window.__logoResizeTimer);
-          window.__logoResizeTimer = setTimeout(ensureEnoughContent, 120);
-        });
-      })();
-    </script>
-  </section>
-<style>
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: opacity, transform;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>
-
-<script>
-// ENERGICZNY, ALE PŁYNNIEJSZY FADE-IN OBSERVER
-const fadeEls = document.querySelectorAll('.fade-in');
-
-if (fadeEls.length) {
-  const observer = new IntersectionObserver((entries, obs) => {
-    for (const e of entries) {
-      if (!e.isIntersecting) continue;
-      const el = e.target;
-      el.style.transitionDelay = el.dataset.delay || '0s';
-      el.classList.add('visible');
-      obs.unobserve(el);
-    }
-  }, { threshold: 0.05 });
-
-  fadeEls.forEach(el => observer.observe(el));
-}
-</script>
-
-<!-- === SCRIPTS === -->
-<script>
-function animateValue(el, start, end, duration) {
-  let startTime = null;
-  function step(timestamp) {
-    if (!startTime) startTime = timestamp;
-    const progress = Math.min((timestamp - startTime) / duration, 1);
-    const value = Math.floor(progress * (end - start) + start);
-    el.textContent = value.toLocaleString("pl-PL") + " +";
-    if (progress < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  const counters = document.querySelectorAll("[data-counter]");
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const end = parseInt(el.getAttribute("data-counter"), 10);
-        animateValue(el, 0, end, 2000);
-        obs.unobserve(el); // tylko raz
-      }
-    });
-  }, { threshold: 0.4 }); // 0.4 = 40% widoczności
-
-  counters.forEach(el => observer.observe(el));
-});
-</script>
-
-
-<script>
-
-// MENU MOBILE — animacja + hamburger w X
-const toggleBtn = document.getElementById('menuToggle');
-const mobileNav = document.getElementById('mobileNav');
-let menuOpen = false;
-
-toggleBtn.addEventListener('click', () => {
-  menuOpen = !menuOpen;
-  toggleBtn.classList.toggle('active', menuOpen);
-  if (menuOpen) {
-    mobileNav.classList.remove('-translate-y-full', 'opacity-0');
-    mobileNav.classList.add('translate-y-0', 'opacity-100');
-  } else {
-    mobileNav.classList.add('-translate-y-full', 'opacity-0');
-    mobileNav.classList.remove('translate-y-0', 'opacity-100');
-  }
-});
-
-mobileNav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileNav.classList.add('-translate-y-full', 'opacity-0');
-    mobileNav.classList.remove('translate-y-0', 'opacity-100');
-    toggleBtn.classList.remove('active');
-    menuOpen = false;
-  });
-});
-</script>
-<script>
-// Paralaksa
-const parallaxElements = document.querySelectorAll('.parallax');
-const isMobile = /Mobi|Android/i.test(navigator.userAgent) || /iPad|iPhone|iPod/.test(navigator.userAgent);
-if (isMobile) {
-  window.addEventListener('scroll', () => {
-    const scrollPos = window.pageYOffset;
-    parallaxElements.forEach(el => {
-      el.style.backgroundPosition = `center ${scrollPos * 0.5}px`;
-    });
-  });
-} else {
-  parallaxElements.forEach(el => el.style.backgroundAttachment = 'fixed');
-}
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = document.querySelectorAll('nav a[href^="#"]');
-  const sections = Array.from(navLinks)
-    .map(link => document.querySelector(link.getAttribute("href")))
-    .filter(Boolean);
-
-  // Dodajemy transition do każdego linka
-  navLinks.forEach(link => {
-    link.classList.add("transition-colors", "duration-300", "ease-in-out");
-  });
-
-  function setActiveLink(id) {
-    navLinks.forEach(link => {
-      link.classList.toggle("text-[#ff8a36]", link.getAttribute("href") === `#${id}`);
-    });
-  }
-
-  function onScroll() {
-    let closestSection = null;
-    let minDist = Infinity;
-    const viewportCenter = window.innerHeight / 2;
-
-    sections.forEach(section => {
-      const rect = section.getBoundingClientRect();
-      const sectionCenter = rect.top + rect.height / 2;
-      const dist = Math.abs(sectionCenter - viewportCenter);
-      if (dist < minDist) {
-        minDist = dist;
-        closestSection = section;
-      }
-    });
-
-    if (closestSection) setActiveLink(closestSection.id);
-  }
-
-  window.addEventListener("scroll", onScroll);
-  onScroll(); // ustawienie aktywnego linka przy załadowaniu strony
-});
-</script>
-
+</div>
 
 </body>
 </html>
