@@ -345,19 +345,9 @@ p{
   inset:0;
   border-radius:12px;
   pointer-events:none;
-  border:2px solid #000;
-  box-sizing:border-box;
-  transform-origin:left center;
-  transform:scaleX(var(--draw, 0));
-  transition:transform .12s linear;
-  z-index:2;
+  border:2px solid rgb(0, 0, 0);
+  clip-path:polygon(0 0,var(--draw, 0%) 0,var(--draw, 0%) 100%,0 100%);
 }
-
-.pricing-table tr td{
-  position:relative;
-  z-index:1;
-}
-
 .pricing-text{
   opacity:0;
   transform:translateY(16px);
@@ -929,6 +919,84 @@ body.menu-open{overflow:hidden;}
   .nav-indicator{display:none;}
 }
 
+/* ===== FIX: cennik mobile (za duży height/width) ===== */
+@media (max-width: 1024px){
+  #s2 .content{
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .pricing-wrap{
+    width: 100% !important;
+    gap: 14px !important;
+  }
+
+  .pricing-card{
+    width: min(100%, 680px) !important;
+    margin-inline: auto !important;
+    border-radius: 14px !important;
+  }
+
+  .pricing-scroll{
+    max-height: 48svh !important; /* mniejszy blok */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .pricing-table{
+    width: 100% !important;
+    border-spacing: 0 6px !important; /* mniejsza „wysokość” między wierszami */
+    font-size: 12px !important;
+  }
+
+  .pricing-table td{
+    padding: 7px 8px !important; /* mniejsza wysokość wiersza */
+  }
+
+  .pricing-table td:first-child{
+    width: 58% !important; /* ogranicza rozpychanie */
+  }
+
+  .pricing-table td:last-child{
+    width: 42% !important;
+    gap: 6px !important;
+    white-space: normal !important; /* koniec z rozpychaniem */
+    flex-wrap: wrap !important;
+    justify-content: flex-end !important;
+  }
+
+  .row-cta{
+    height: 24px !important;
+    padding: 0 9px !important;
+    font-size: 8px !important;
+    margin-right: 0 !important; /* usuwa dodatkowe poszerzanie */
+    flex-shrink: 0 !important;
+  }
+
+  .price{ font-size: 12px !important; }
+  .time{ font-size: 10px !important; margin-top: 2px !important; }
+
+  .pricing-note{
+    font-size: 10px !important;
+    padding: 10px 12px 14px !important;
+  }
+}
+
+@media (max-width: 680px){
+  .pricing-card{ width: 100% !important; }
+
+  .pricing-table td:first-child{ width: 55% !important; }
+  .pricing-table td:last-child{ width: 45% !important; }
+
+  .pricing-scroll{ max-height: 44svh !important; }
+}
+
+@media (max-width: 420px){
+  .pricing-table{ font-size: 11px !important; }
+  .pricing-table td{ padding: 6px 6px !important; }
+  .row-cta{ height: 22px !important; padding: 0 8px !important; font-size: 7.5px !important; }
+}
 
 </style>
 </head>
@@ -1491,7 +1559,7 @@ function updateDraw() {
       const clamped = Math.min(Math.max(reveal,0),1);
       const eased = Math.pow(clamped,1.6);
       row.classList.toggle("row-reveal", clamped > 0.05);
-      row.style.setProperty("--draw", eased.toFixed(3));
+      row.style.setProperty("--draw", `${eased*100}%`);
     });
   }
 }
