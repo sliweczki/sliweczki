@@ -919,6 +919,43 @@ body.menu-open{overflow:hidden;}
   .nav-indicator{display:none;}
 }
 
+/* ===== FIX CENNIK MOBILE ===== */
+@media (max-width: 1024px){
+  .pricing-table{
+    font-size:12.5px !important;
+  }
+
+  .pricing-table td{
+    padding:8px 6px !important;
+  }
+
+  /* tu był błąd: było .salon-btn */
+  .pricing-table .row-cta{
+    height:26px !important;
+    padding:0 10px !important;
+    font-size:9px !important;
+    letter-spacing:1px !important;
+    border-radius:999px !important;
+  }
+
+  .pricing-table td:last-child{
+    gap:6px !important;
+  }
+}
+
+@media (max-width: 680px){
+  .pricing-table td:last-child{
+    display:flex !important;
+    flex-wrap:wrap !important;
+    justify-content:flex-end !important;
+    align-items:center !important;
+    white-space:normal !important; /* było nowrap i rozpychało */
+  }
+
+  .pricing-table td:last-child > div{
+    align-items:flex-end !important;
+  }
+}
 
 </style>
 </head>
